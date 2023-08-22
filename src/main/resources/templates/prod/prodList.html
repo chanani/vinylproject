@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<link rel="stylesheet" th:href="@{/css/itempage.css}">
+
+
+<th:block th:replace="~{include/basicLayout :: setContent(~{::.wrap})}">
+
+
+    <div class="itemPage_img_box wrap">
+        <div class="itemPage_background">
+            <div class="itemPage_text">
+                <h1 style="text-shadow: 0px 0px 8px #f7fd82, 0px 0px 40px #ccc;">20% OFF SUMMER SALE</h1>
+                <p>Our Summer Sale is now on. Shop 100's of releases including signed, limited and Sound Of Vinyl </p>
+                <p>exclusive formats from your favourite artists. Hurry though, sale must end at 11.59pm on Friday 30th
+                    June 2023.</p>
+                <p>Please note: 20% discount is applied at checkout.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container wrap" id="drop_box">
+        <h2>Vinyl</h2>
+        <div class="dropdown right">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">정렬
+                <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li class="active"><a href="#">추천순</a></li>
+                <!-- <li class="disabled"> -->
+                <li><a href="#">판매순</a></li>
+                <li><a href="#">등록순</a></li>
+                <li><a href="#">리뷰많은순</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="container wrap">
+        <div class="row">
+            <div class="item_list">
+                <div class="item_box">
+                    <div class="item_vinyl">
+                        <a href="#"><img th:src="@{/img/item1.avif}" alt=""></a>
+                        <h4>sza</h4>
+                        <p>S.O.S</p>
+                        <p>$23.99</p>
+                    </div>
+                    <div class="item_vinyl">
+                        <a href="#"><img th:src="@{/img/item2.avif}" alt=""></a>
+                        <h4>sza</h4>
+                        <p>S.O.S</p>
+                        <p>$23.99</p>
+                    </div>
+                    <div class="item_vinyl">
+                        <a href="#"><img th:src="@{/img/item3.avif}" alt=""></a>
+                        <h4>sza</h4>
+                        <p>S.O.S</p>
+                        <p>$23.99</p>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="container wrap" id="pagination_list">
+        <ul class="pagination">
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">6</a></li>
+            <li><a href="#">7</a></li>
+            <li><a href="#">8</a></li>
+
+        </ul>
+    </div>
+
+
+</th:block>
+
+<script th:inline="javascript">
+    let msg = `[[${msg}]]`
+    if (msg ==! 'null'){
+        alert(msg);
+    }
+</script>
+
+
+
+</html>

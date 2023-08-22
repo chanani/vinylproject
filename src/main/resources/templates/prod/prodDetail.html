@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<link rel="stylesheet" th:href="@{/css/detailpage.css}">
+
+
+<th:block th:replace="~{include/basicLayout :: setContent(~{::.wrap})}">
+
+  <div class="container wrap">
+    <div class="row">
+      <div class="product">
+        <div class="product_img">
+          <div class="product_main_img">
+            <img th:src="@{/img/product_img/main5.png}" alt="">
+          </div>
+          <div class="product_sub_img">
+            <a href=""><img th:src="@{/img/product_img/sub1.png}" alt=""></a>
+            <a href=""><img th:src="@{/img/product_img/sub2.png}" alt=""></a>
+            <a href=""><img th:src="@{/img/product_img/sub3.png}" alt=""></a>
+          </div>
+          <div class="track_list">
+            <p>A1 : happy</p>
+            <hr>
+            <p>A2 : S.O.S</p>
+            <hr>
+            <p>A3 : I Like you</p>
+            <hr>
+            <p>A4 : Bad guy</p>
+            <hr>
+            <p>A5 : Rainy</p>
+          </div>
+        </div>
+        <div class="product_content">
+          <p class="singer">sza</p>
+          <p class="title">S.O.S</p>
+          <p class="item_number">Item number : 11503</p>
+          <hr style="margin-bottom: 0">
+          <div class="price_amount">
+            <div class="price_amount_left">
+              <p class="price">39,900원</p>
+            </div>
+            <div class="price_amount_right">
+              <p>수량 : </p>
+              <select name="amount" id="amount">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+            </div>
+          </div>
+
+          <p class="post_price">배송비 : 3,000원</p>
+          <div class="buy_btn_box">
+            <button class="like_btn"><i class="glyphicon glyphicon glyphicon-heart-empty"></i></button>
+            <button class="buy_btn"><i class="glyphicon glyphicon-hand-right"></i> 구매하기</button>
+            <button class="cart_btn"><i class="glyphicon glyphicon-shopping-cart"></i> 장바구니</button>
+          </div>
+          <div class="product_info">
+            <p class="in_stock">· In Stock</p>
+            <hr/>
+            <h4>상품정보</h4>
+            <div class="product_content_read">
+              <p>Multi-GRAMMY® and Oscar® winner Jon Batiste invites the world to experience the marriage of hard hitting pop songs to a rich tapestry of international sounds on his highly anticipated album, World Music Radio. Jon Batiste delves into the profound question: Isn't all music, in essence, world music? Drawing inspiration from Batiste’s mission to create community with the power of music, this album serves as a sonic passport for listeners' ears, inviting them on a transformative musical journey meant for everyone. The announcement of World Music Radio follows the success of Batiste’s historic and critically acclaimed album WE ARE, which swept the 64th Annual GRAMMY Awards winning five awards including prestigious Best Album. His career- spanning fourteen nominations across seven categories is not only a first in GRAMMY history, it also proves his ability to defy genres.
+                
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</th:block>
+
+
+</html>

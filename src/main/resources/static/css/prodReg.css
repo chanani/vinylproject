@@ -1,0 +1,13 @@
+.reg_box {
+  border: 1px solid #777;
+}
+
+.reg_box h3 {
+  text-align: center;
+}
+
+.reg_info_box .img_box{
+  margin: 30px 0;
+ }
+
+ .info {text-align: center;}

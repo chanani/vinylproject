@@ -1,0 +1,127 @@
+header .upper {
+    background-color: rgb(63, 62, 62);
+    text-align: center;
+    height: auto;
+    width: auto;
+}
+@media (max-width: 768px) {
+    header .upper, .slide, footer
+     {
+      width: 985px; /* 작은 화면에서도 원하는 너비를 유지할 수 있도록 설정 */
+    }
+  }
+header > .upper > .inset {
+    width: 970px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+header .menu_left {position: absolute; line-height: 50px; bottom: 45; left: 0;}
+header .menu_left .menu_nav > .records{
+    color: #ddd;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: normal;
+}
+header .menu_left .menu_nav > .toys{
+    color: #ddd;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: normal;
+    margin-left: 20px;
+}
+header .menu_left .menu_nav > a {line-height: 25px;}
+header .upper .inset .icon_right{position: absolute; top: 5px; right: 0; line-height: 50px;}
+header .upper .inset .icon_right > a{font-size: 22px; color: #ddd; margin-left: 15px;}
+header .upper .inset .logo {color: #ddd; font-size: 40px; font-weight: 700; text-decoration: none; line-height:100px}
+header .upper .inset .search {position: absolute; bottom: 15px; right: 0; box-sizing: border-box;} 
+header .upper .inset .search > input {
+    display: inline-block;
+    width: 150px; 
+    box-sizing: border-box; 
+    background: none; 
+    border: none; 
+    height: 30px; 
+    font-size: 15px; 
+    font-weight: normal; 
+    padding: 0; 
+    border-bottom: 2px solid #ddd;
+    outline: none;
+    color: #ddd;
+}
+header .upper .inset .search > i {
+    display: inline-block;
+    font-size: 20px;
+    color: #ddd;
+    margin-left: 10px;
+}
+
+/* lower */
+header .lower .inset{width: 970px;height: 50px; margin: 0 auto;}
+header .lower .inset > .menu_bar {text-align: center;}
+header .lower .inset > .menu_bar > a {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: normal;
+    color: #777;
+    line-height: 50px;
+    text-decoration: none;
+    margin-right: 17px;
+}
+header .lower .inset > .menu_bar > a:hover {
+    border-bottom: 15px solid black;
+    color: black;
+}
+
+
+
+
+
+
+
+/* footer */
+
+footer {
+    margin-top: 100px;
+    border-top: 1px solid #ddd;
+}
+footer .container .ft_content {
+    overflow: hidden;
+    
+}
+
+footer .container .ft_content .content_list {
+    float: left;
+    width: 250px;
+    padding-left: 100px;
+    margin-top: 20px;
+}
+footer .container .ft_content .content_list > li{margin-bottom: 5px;}
+
+footer .ft_banner {
+    overflow: hidden;
+}
+
+footer .ft_banner .banner_left {
+    float: left;
+}
+
+footer .ft_banner .banner_right {
+    float: right;
+}
+
+footer .ft_banner .banner_right > li {
+    
+}
+
+footer .ft_banner {overflow: hidden;  padding: 50px 97px 0;}
+footer .ft_banner .banner_left {float:Left}
+footer .ft_banner .banner_right{float:light; overflow: hidden;}
+footer .ft_banner .banner_right > li{float: left; padding-left: 15px; }
+
+
+
+
+
+

@@ -1,0 +1,179 @@
+/* 디자인 시작 전에 공통적으로 선언 */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    font-family: 'Moirai One', cursive;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+ul, li, ol, dd ,dl {
+    list-style: none;
+}
+
+input, textarea, select, button {
+    /* 브라우저 별로 기본 디자인들을 제거해서 동일한 디자인으로 보여질 수 있도록 선언 */
+    -webkit-appearance: none; /* 구글, 사파리 */
+    -moz-appearance: none; /* 파이어폭스 */
+    appearance: none;
+    /* border: none; */
+}
+
+.form-control {border-radius: 0;}
+.btn {border-radius: 0;}
+
+/* header */
+
+.my-header{
+    position: fixed;        
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 50;
+}
+
+.my-nav {
+    background-color: #263238 ;
+    border: none;
+    border-radius: 0;
+    margin: 0;
+}
+
+.my-nav .navbar-nav> li >a {
+    color: white;
+}
+.my-nav .navbar-brand {padding: 0 20px;}
+.my-nav .navbar-brand img {
+    height: 50px;
+}
+
+.my-nav .navbar-nav > li > a:hover {
+    background-color: #f2aaaa;
+} 
+
+
+/* article */
+.my-article {margin-top: 50px;}
+
+.carousel-control.right {
+    background-image: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,.0) 100%);
+}
+.carousel-control.left{
+    background-image: linear-gradient(to left,rgba(0,0,0,0) 0,rgba(0,0,0,.0) 100%);
+}
+
+
+/* section */
+.prod-list {padding: 5px; border: 1px solid #777;}
+.prod-list > li[class*="col-"] {
+    padding: 5px; /* li태그중 class=col- 이 포함된 태그 */
+}
+
+.prod-link {
+    border: 1px solid #777; 
+    display: block;
+    text-align: center;
+    position: relative;
+}
+
+.prod-link > .arrow {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    color: #fff;
+    background-color: #ddd;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+}
+
+.prod-link > .hover {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    color: #fff;
+    background-color: #f17373;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    opacity: 0;
+}
+
+.prod-link:hover > .arrow{
+    opacity: 0;
+}
+
+.prod-link:hover > .hover{
+    opacity: 1;
+}
+
+.prod-link:hover{
+    border-color: red;
+}
+
+
+
+
+
+/* blog */
+.blog-wrap > .inner {
+    border: 1px solid #ddd;
+    position: relative;
+}
+
+.blog-wrap .blog-content {
+    padding: 10px;
+}
+
+.blog-wrap .blog-content > p {
+    font-size: 15px;
+    font-weight: 800;
+    height: 60px;
+    overflow: hidden;
+}
+
+
+.blog-price  {overflow: hidden;}
+.blog-price .left {float: left; overflow: hidden;}
+.blog-price .right{float: right;}
+
+.blog-price .left > li {
+    float: left; 
+    color:gold;
+}
+
+
+.blog-hover-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+}
+
+.blog-wrap  .inner:hover > .blog-hover-content{
+    opacity: 1;
+}
+
+@media(min-width:1200px) {
+    .blog-wrap.col-lg-2 {
+        width: 20%;
+    }
+}
+
+
+
+
+
+
+
+

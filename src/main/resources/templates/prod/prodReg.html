@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<link rel="stylesheet" th:href="@{/css/prodReg.css}">
+
+
+<th:block th:replace="~{include/basicLayout :: setContent(~{::.wrap})}">
+
+
+
+<div class="container wrap">
+    <div class="row">
+
+      <div class="reg_box">
+        <h3>상품등록</h3>
+        <div class="reg_input_box">
+          <form action="registForm" enctype="multipart/form-data" method="post">
+            <div class="reg_info_box">
+              <tr class="info">
+                <td>상품명</td>
+                <td><input type="text" name="prod_name"></td>
+                <td>가격</td>
+                <td><input type="text" name="prod_price"></td>
+                <td>가수명</td>
+                <td><input type="text" name="prod_singer"></td>
+                <td>재고</td>
+                <td><input type="number" name="prod_stock"></td>
+                <td>카테고리</td>
+                <td><input type="text" name="prod_category"></td>
+              </tr>
+              
+                
+              <div class="img_box">
+                <td>대표이미지</td>
+                <td><input type="file" name="file"></td>
+                <td>상세이미지</td>
+                <td><input type="file" name="file"></td>
+                <td>상세이미지</td>
+                <td><input type="file" name="file"></td>
+              </div>
+
+            </div>
+
+            <div class="reg_content_box">
+              <tr>
+                <td>상품설명</td>
+                <td><textarea name="prod_content" id="" cols="30" rows="10" ></textarea></td>
+              </tr>
+            </div>
+
+            <button>등록</button>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="ft_content">
+          <ul class="content_list">
+            <h5>Help</h5>
+            <li>주문상태</li>
+            <li>결제</li>
+            <li>배송</li>
+            <li>교환 및 반품</li>
+            <li>자주하는 질문</li>
+            <li>문의하기</li>
+          </ul>
+          <ul class="content_list">
+            <h5>Contact</h5>
+            <li>연락처 : </li>
+            <li>02-999-9999</li>
+            <li>이메일 : </li>
+            <li>theholidaynight@gmail.com</li>
+            <li>인스타 : <a href="https://www.instagram.com/c.ha_n/">c.ha_n<img src="img/instaicon.png" alt=""
+                  style="height: 20px;"></a></li>
+          </ul>
+        </div>
+        <div class="ft_banner">
+          <ul class="banner_left">
+            <p>made with by chan © 2023 </p>
+          </ul>
+          <ul class="banner_right">
+            <li>접근성</li>
+            <li>이용약관</li>
+            <li>개인 정보 정책</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+</th:block>
+
+
+</html>
