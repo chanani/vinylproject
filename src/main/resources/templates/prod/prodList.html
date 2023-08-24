@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<link rel="stylesheet" th:href="@{/css/itempage.css}">
 
 
 <th:block th:replace="~{include/basicLayout :: setContent(~{::.wrap})}">
@@ -86,11 +85,12 @@
 </th:block>
 
 <script th:inline="javascript">
-    let msg = `[[${msg}]]`
-    if (msg ==! 'null'){
+    var msg = '[[${msg}]]';
+    if (msg !== 'null'){
         alert(msg);
     }
 </script>
+
 
 
 

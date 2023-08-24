@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -42,11 +43,23 @@ public class ProdController {
 
     @RequestMapping("/registForm")
     public String registForm(ProdVO vo,
-                             @RequestParam("file") List<MultipartFile> file,
+                             @RequestParam("file") ArrayList<MultipartFile> file,
                              RedirectAttributes ra){
+        for (int i = 0; i < file.size(); i++) {
+            if (file.get(i).getOriginalFilename() == ""){
+                file.remove(i);
+                i--;
+            }
+        }
+
+        if (file.get(0).getContentType().contains("image") == false) {
+            ra.addFlashAttribute("msg", "jpg, png, jpeg 형식의 이미지 파일만 등록이 가능합니다.");
+            return "redirect:/prod/prodList"; //이미지가 아니라면 list목록으로
+        }
+
 
         int result = prodService.prodRegist(vo);
-
+        int result1 = prodService.prodRegistImg(vo.getProd_name(), file);
         String msg = result == 1 ? "상품이 등록되었습니다." : "상품 등록에 실패하였습니다.";
         ra.addFlashAttribute("msg", msg);
 

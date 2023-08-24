@@ -18,6 +18,7 @@ public class ProdVO {
     private Integer prod_stock;
     private Integer prod_hits;
     private String prod_category;
+    private Integer prod_num;
 
 
 

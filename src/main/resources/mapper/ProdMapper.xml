@@ -20,4 +20,37 @@
                 #{prod_category})
     </insert>
 
+    <insert id="prodRegistImg" parameterType="ProdImgVO">
+        <selectKey keyProperty="generatedKey" resultType="int" order="BEFORE">
+            select prod_num from prod where prod_name = #{prod_name}
+        </selectKey>
+
+        insert into image (img_name,
+        img_uuid,
+        img_path,
+        img_type,
+        prod_num)
+        values
+        <foreach collection="list" item="item" separator=",">
+        (#{item.img_name,jdbcType=VARCHAR},
+        #{item.img_uuid,jdbcType=VARCHAR},
+        #{item.img_path,jdbcType=VARCHAR},
+        #{item.img_type,jdbcType=VARCHAR},
+        #{generatedKey})
+        </foreach>
+
+    </insert>
+
+    <select id="prodList" resultType="ProdVO">
+        select * from prod
+    </select>
+
+   <!-- <select id="prodListImg" resultType="ProdImgVO">
+        select * from image where
+        <foreach collection="list" item="item" separator=",">
+            (#{item})
+        </foreach>
+    </select>-->
+
+
 </mapper>
