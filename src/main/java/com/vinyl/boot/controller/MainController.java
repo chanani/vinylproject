@@ -34,7 +34,7 @@ public class MainController {
 
         model.addAttribute("list", list);
         // model.addAttribute("list2", list2);
-
+        System.out.println(list.toString());
         return "/main/mainpage";
     }
 
