@@ -25,16 +25,10 @@ public class MainController {
     public String MainPage(Model model){
 
         ArrayList<ProdVO> list = prodService.prodList();
-        ArrayList<Integer> prod_id = new ArrayList<>();
-
-        // ArrayList<ProdImgVO> list2 = prodService.prodListImg(prod_id);
-
-        for (int i = 0; i < list.size(); i++) prod_id.add(list.get(i).getProd_num());
 
 
         model.addAttribute("list", list);
-        // model.addAttribute("list2", list2);
-        System.out.println(list.toString());
+
         return "/main/mainpage";
     }
 

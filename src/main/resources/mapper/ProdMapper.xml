@@ -45,12 +45,7 @@
         select * from prod
     </select>
 
-   <!-- <select id="prodListImg" resultType="ProdImgVO">
-        select * from image where
-        <foreach collection="list" item="item" separator=",">
-            (#{item})
-        </foreach>
-    </select>-->
+
 
 
 </mapper>

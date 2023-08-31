@@ -13,7 +13,6 @@ public interface ProdMapper {
     public int prodRegist(ProdVO vo);
     public int prodRegistImg(@Param("prod_name") String prod_name, @Param("list") ArrayList<ProdImgVO> list);
     public ArrayList<ProdVO> prodList();
-    // public ArrayList<ProdImgVO> prodListImg(ArrayList<Integer> list);
 
 
 }

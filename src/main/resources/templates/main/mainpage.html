@@ -65,11 +65,11 @@
 
 
                 <div class="item_box_id">
-                    <ul class="item_list">
-                        <li class="item_vinyl">
+                    <ul class="item_list" th:each="vo, status : ${list}">
+                        <li class="item_vinyl" >
                             <a href="#" name="vinyl"><img th:src="@{/img/vinyl2.png}" alt=""></a>
-                            <p>sza<br>S.O.S</p>
-                            <p>2LP | $26.99</p>
+                            <p>[[${vo.prod_singer}]]<br>[[${vo.prod_name}]]</p>
+                            <p>[[${vo.prod_price}]]원</p>
                         </li>
                     </ul>
                 </div>

@@ -96,8 +96,4 @@ public class ProdServiceImpl implements ProdService{
         return prodMapper.prodList();
     }
 
-    /*@Override
-    public ArrayList<ProdImgVO> prodListImg(ArrayList<Integer> list) {
-        return prodMapper.prodListImg(list);
-    }*/
 }
