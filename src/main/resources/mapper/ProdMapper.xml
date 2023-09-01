@@ -45,6 +45,10 @@
         select * from prod
     </select>
 
+    <select id="prodNewList" resultType="ProdVO">
+        select * from prod order by prod_num DESC
+    </select>
+
 
 
 

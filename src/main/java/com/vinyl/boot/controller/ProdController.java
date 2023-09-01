@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,7 +27,9 @@ public class ProdController {
     private String uploadPath;
 
     @RequestMapping("/prodList")
-    public String prodList(){
+    public String prodList(Model model){
+        ArrayList<ProdVO> list = prodService.prodList();
+        model.addAttribute("list", list);
 
         return "/prod/prodList";
     }

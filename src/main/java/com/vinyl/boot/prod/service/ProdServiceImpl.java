@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Service("prodService")
@@ -94,6 +93,11 @@ public class ProdServiceImpl implements ProdService{
     @Override
     public ArrayList<ProdVO> prodList() {
         return prodMapper.prodList();
+    }
+
+    @Override
+    public ArrayList<ProdVO> prodNewList() {
+        return prodMapper.prodNewList();
     }
 
 }

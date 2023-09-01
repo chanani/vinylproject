@@ -35,7 +35,7 @@
                         <a href="#" class="toys">Toys</a>
                     </div>
                 </nav>
-                <a href="" class="logo">oh, Universe</a>
+                <a th:href="@{/}" class="logo">oh, Universe</a>
                 <div class="icon_right">
                     <a href="javascript:void(0);" onclick="openModal('login_popup.html')"><i class="glyphicon glyphicon-user"></i></a>
                     <a href="#"><i class="glyphicon glyphicon-heart"></i></a>
@@ -103,7 +103,7 @@
         <div class="lower">
             <div class="inset">
                 <nav class="menu_bar">
-                    <a href="#">New In</a>
+                    <a th:href="@{prod/prodList}">New In</a>
                     <a href="item_listpage.html">Top 100</a>
                     <a href="#">Exclusives</a>
                     <a href="#">Genres</a>

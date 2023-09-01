@@ -38,28 +38,15 @@
     <div class="container wrap">
         <div class="row">
             <div class="item_list">
-                <div class="item_box">
-                    <div class="item_vinyl">
-                        <a href="#"><img th:src="@{/img/item1.avif}" alt=""></a>
-                        <h4>sza</h4>
-                        <p>S.O.S</p>
-                        <p>$23.99</p>
-                    </div>
-                    <div class="item_vinyl">
-                        <a href="#"><img th:src="@{/img/item2.avif}" alt=""></a>
-                        <h4>sza</h4>
-                        <p>S.O.S</p>
-                        <p>$23.99</p>
-                    </div>
-                    <div class="item_vinyl">
-                        <a href="#"><img th:src="@{/img/item3.avif}" alt=""></a>
-                        <h4>sza</h4>
-                        <p>S.O.S</p>
-                        <p>$23.99</p>
-                    </div>
 
-
-                </div>
+                    <div class="item_box" >
+                        <div class="item_vinyl" th:each="vo, status : ${list}">
+                            <a href="#"><img th:src="@{/img/item1.avif}" alt=""></a>
+                            <h4>[[${vo.prod_name}]]</h4>
+                            <p>[[${vo.prod_singer}]]</p>
+                            <p>[[${vo.prod_price}]]원</p>
+                        </div>
+                    </div>
 
             </div>
 

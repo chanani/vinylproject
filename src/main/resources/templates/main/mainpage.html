@@ -65,7 +65,7 @@
 
 
                 <div class="item_box_id">
-                    <ul class="item_list" th:each="vo, status : ${list}">
+                    <ul class="item_list" th:each="vo, status : ${list}" th:if="${status.index} < 10">
                         <li class="item_vinyl" >
                             <a href="#" name="vinyl"><img th:src="@{/img/vinyl2.png}" alt=""></a>
                             <p>[[${vo.prod_singer}]]<br>[[${vo.prod_name}]]</p>
@@ -88,41 +88,15 @@
                     </ul>
                 </div>
                 <div class="new_item_box_id">
-                    <ul class="new_item_list">
-                        <li class="new_item_vinyl">
-                            <a href="#" name="vinyl"><img th:src="@{/img/vinyl2.png}" alt=""></a>
-                            <p>sza<br>S.O.S</p>
-                            <p>2LP | $26.99</p>
-                        </li>
-                    </ul>
-                    <ul class="new_item_list">
+
+                    <ul class="new_item_list" th:each="vo, status : ${list2}" th:if="${status.index} < 5">
                         <li class="new_item_vinyl">
                             <a href="#" name="vinyl"><img th:src="@{/img/vinyl3.png}" alt=""></a>
-                            <p>sza<br>S.O.S</p>
-                            <p>2LP | $26.99</p>
+                            <p>[[${vo.prod_singer}]]<br>[[${vo.prod_name}]]</p>
+                            <p>[[${vo.prod_price}]]원</p>
                         </li>
                     </ul>
-                    <ul class="new_item_list">
-                        <li class="new_item_vinyl">
-                            <a href="#" name="vinyl"><img th:src="@{/img/vinyl5.png}" alt=""></a>
-                            <p>sza<br>S.O.S</p>
-                            <p>2LP | $26.99</p>
-                        </li>
-                    </ul>
-                    <ul class="new_item_list">
-                        <li class="new_item_vinyl">
-                            <a href="#" name="vinyl"><img th:src="@{/img/vinyl7.png}" alt=""></a>
-                            <p>sza<br>S.O.S</p>
-                            <p>2LP | $26.99</p>
-                        </li>
-                    </ul>
-                    <ul class="new_item_list">
-                        <li class="new_item_vinyl">
-                            <a href="#" name="vinyl"><img th:src="@{/img/vinyl9.png}" alt=""></a>
-                            <p>sza<br>S.O.S</p>
-                            <p>2LP | $26.99</p>
-                        </li>
-                    </ul>
+
                 </div>
             </div>
 

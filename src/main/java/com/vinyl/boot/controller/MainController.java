@@ -24,10 +24,13 @@ public class MainController {
     @RequestMapping("")
     public String MainPage(Model model){
 
-        ArrayList<ProdVO> list = prodService.prodList();
+        ArrayList<ProdVO> list = prodService.prodList(); // 상품 리스트
+        ArrayList<ProdVO> list2 = prodService.prodNewList(); // 상품 리스트
 
 
         model.addAttribute("list", list);
+        model.addAttribute("list2", list2);
+
 
         return "/main/mainpage";
     }
