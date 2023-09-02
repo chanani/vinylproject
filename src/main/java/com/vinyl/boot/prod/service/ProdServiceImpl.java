@@ -100,4 +100,9 @@ public class ProdServiceImpl implements ProdService{
         return prodMapper.prodNewList();
     }
 
+    @Override
+    public ProdVO prodDetail(Integer prod_num) {
+        return prodMapper.prodDetail(prod_num);
+    }
+
 }

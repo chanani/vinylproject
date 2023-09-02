@@ -13,4 +13,5 @@ public interface ProdService {
     public int prodRegistImg(String prod_num, ArrayList<MultipartFile> file);
     public ArrayList<ProdVO> prodList ();
     public ArrayList<ProdVO> prodNewList ();
+    public ProdVO prodDetail(Integer prod_num);
 }

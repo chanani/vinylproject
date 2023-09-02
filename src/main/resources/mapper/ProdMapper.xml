@@ -49,7 +49,9 @@
         select * from prod order by prod_num DESC
     </select>
 
-
+    <select id="prodDetail" resultType="ProdVO">
+        select * from prod where prod_num = #{prod_num}
+    </select>
 
 
 </mapper>

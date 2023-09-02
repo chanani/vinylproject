@@ -35,7 +35,10 @@ public class ProdController {
     }
 
     @RequestMapping("/prodDetail")
-    public String prodDetail(){
+    public String prodDetail(@RequestParam("prod_num") Integer prod_num,
+                             Model model){
+        ProdVO vo = prodService.prodDetail(prod_num);
+        model.addAttribute("vo", vo);
         return "prod/prodDetail";
     }
 

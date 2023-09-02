@@ -12,8 +12,9 @@ public interface ProdMapper {
 
     public int prodRegist(ProdVO vo);
     public int prodRegistImg(@Param("prod_name") String prod_name, @Param("list") ArrayList<ProdImgVO> list);
-    public ArrayList<ProdVO> prodList();
-    public ArrayList<ProdVO> prodNewList ();
+    public ArrayList<ProdVO> prodList(); // 메인페이지 리스트
+    public ArrayList<ProdVO> prodNewList (); // 메인페이지 new리스트
+    public ProdVO prodDetail(Integer prod_num); // 상품 디테일 페이지
 
 
 }
