@@ -67,7 +67,7 @@
                 <div class="item_box_id">
                     <ul class="item_list" th:each="vo, status : ${list}" th:if="${status.index} < 10">
                         <li class="item_vinyl" >
-                            <a href="#" name="vinyl"><img th:src="@{/img/vinyl2.png}" alt=""></a>
+                            <a th:href="@{/prod/prodDetail(prod_num=${vo.prod_num})}" name="vinyl"><img th:src="@{/img/vinyl2.png}" alt=""></a>
                             <p>[[${vo.prod_singer}]]<br>[[${vo.prod_name}]]</p>
                             <p>[[${vo.prod_price}]]원</p>
                         </li>
@@ -91,7 +91,7 @@
 
                     <ul class="new_item_list" th:each="vo, status : ${list2}" th:if="${status.index} < 5">
                         <li class="new_item_vinyl">
-                            <a href="#" name="vinyl"><img th:src="@{/img/vinyl3.png}" alt=""></a>
+                            <a th:href="@{/prod/prodDetail(prod_num=${vo.prod_num})}" name="vinyl"><img th:src="@{/img/vinyl3.png}" alt=""></a>
                             <p>[[${vo.prod_singer}]]<br>[[${vo.prod_name}]]</p>
                             <p>[[${vo.prod_price}]]원</p>
                         </li>

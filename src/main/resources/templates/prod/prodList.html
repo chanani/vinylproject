@@ -40,7 +40,7 @@
             <div class="item_list">
 
                     <div class="item_box" >
-                        <div class="item_vinyl" th:each="vo, status : ${list}">
+                        <div class="item_vinyl" th:each="vo, status : ${list}" th:if="${status.index} < 12">
                             <a th:href="@{/prod/prodDetail(prod_num=${vo.prod_num})}"><img th:src="@{/img/item1.avif}" alt=""></a>
                             <h4>[[${vo.prod_name}]]</h4>
                             <p>[[${vo.prod_singer}]]</p>
