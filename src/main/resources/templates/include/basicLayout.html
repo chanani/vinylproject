@@ -37,7 +37,7 @@
                 </nav>
                 <a th:href="@{/}" class="logo">oh, Universe</a>
                 <div class="icon_right">
-                    <a href="javascript:void(0);" onclick="openModal('login_popup.html')"><i class="glyphicon glyphicon-user"></i></a>
+                    <a href="javascript:void(0);" onclick="openModal()"><i class="glyphicon glyphicon-user"></i></a>
                     <a href="#"><i class="glyphicon glyphicon-heart"></i></a>
                     <a href="#"><i class="glyphicon glyphicon-shopping-cart"></i></a>
                 </div>
@@ -82,19 +82,16 @@
                         <a href="">회원가입</a>
                     </div>
                 </div>
-                <iframe id="modalIframe" src=""></iframe>
             </div>
         </div>
 
         <script>
-            function openModal(url) {
+            function openModal() {
                 document.getElementById('myModal').style.display = 'block';
-                document.getElementById('modalIframe').src = url;
             }
 
             function closeModal() {
                 document.getElementById('myModal').style.display = 'none';
-                document.getElementById('modalIframe').src = '';
             }
         </script>
 
@@ -123,11 +120,6 @@
 
 
     <main th:replace="${content}"></main>
-
-
-
-
-
 
 
     <footer>
