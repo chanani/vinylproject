@@ -72,4 +72,7 @@ public class ProdController {
 
         return "redirect:/prod/prodList";
     }
+
+
+
 }

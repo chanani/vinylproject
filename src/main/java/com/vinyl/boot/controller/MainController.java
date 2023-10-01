@@ -35,7 +35,10 @@ public class MainController {
         return "/main/mainpage";
     }
 
-
+    @RequestMapping("/cartPage")
+    public String cartPage(){
+        return "/main/cartPage";
+    }
 
 
 

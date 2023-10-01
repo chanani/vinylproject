@@ -1,0 +1,16 @@
+.cartPage {
+    width: 970px;
+}
+
+.cartImg > img {
+    width: 170px;
+    height: 170px;
+}
+
+
+.cart_box {overflow: hidden;}
+.cartImg {float: left; width: 20%;}
+.cartInfo {float: left; width: 60%;}
+.cartPrice {float: right;}
+
+

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<link rel="stylesheet" th:href="@{/css/cartpage.css}">
+
+
+<th:block th:replace="~{include/basicLayout :: setContent(~{::.wrap})}">
+
+  <div class="container wrap">
+    <div class="row">
+
+      <div class="pageHead">
+        <h3>Your Cart</h3>
+        <p>1개 / 30,000원</p>
+        <hr/>
+      </div>
+
+      <div class="cart_box">
+        <div class="cartImg">
+          <img th:src="@{/img/vinyl2.png}" alt="image">
+        </div>
+        <div class="cartInfo">
+          <h3 class="prod_name">S.O.S</h3>
+          <p class="prod_singer">SZA</p>
+          <p class="prod_num">ItemNumber : 100</p>
+          <p class="prod_text">Vinyl LP</p>
+        </div>
+
+        <div class="cartPrice">
+          <h4 class="prod_price">30,000원</h4>
+          <select class="prod_count" value="3">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+      </div>
+      <hr/>
+
+    </div>
+  </div>
+
+
+
+</th:block>
+
+
+</html>
