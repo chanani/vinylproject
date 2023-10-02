@@ -69,7 +69,6 @@ public class ProdController {
         String msg = result == 1 ? "상품이 등록되었습니다." : "상품 등록에 실패하였습니다.";
         ra.addFlashAttribute("msg", msg);
 
-
         return "redirect:/prod/prodList";
     }
 
