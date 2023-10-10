@@ -105,4 +105,8 @@ public class ProdServiceImpl implements ProdService{
         return prodMapper.prodDetail(prod_num);
     }
 
+    @Override
+    public int addCart(Integer prod_num, Integer amount) {
+        return prodMapper.addCart(prod_num, amount);
+    }
 }

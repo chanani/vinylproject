@@ -53,5 +53,13 @@
         select * from prod where prod_num = #{prod_num}
     </select>
 
+    <insert id="addCart" parameterType="int">
+        insert into cart (prod_count,
+                          username,
+                          prod_num)
+        values (#{amount},
+                "user",
+                #{prod_num})
+    </insert>
 
 </mapper>

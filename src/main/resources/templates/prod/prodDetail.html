@@ -54,7 +54,7 @@
           <div class="buy_btn_box">
             <button class="like_btn"><i class="glyphicon glyphicon glyphicon-heart-empty"></i></button>
             <button class="buy_btn"><i class="glyphicon glyphicon-hand-right"></i> 구매하기</button>
-            <button class="cart_btn"><i class="glyphicon glyphicon-shopping-cart"></i> 장바구니</button>
+            <button class="cart_btn" onclick="cartHandle()"><i class="glyphicon glyphicon-shopping-cart"></i> 장바구니</button>
           </div>
           <div class="product_info">
             <p class="in_stock">· In Stock</p>
@@ -77,3 +77,23 @@
 
 
 </html>
+
+<script>
+  const cartHandle = () => {
+    let amount = document.getElementById("amount").value;
+    let num = `[[${vo.prod_num}]]`;
+    fetch("/prod/addCart?num=" + num + "&amount=" + amount)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.text(); // 또는 response.json() 사용 가능
+            })
+            .then(data => {
+              alert(data)
+            })
+            .catch(error => {
+              console.error(error);
+            });
+  }
+</script>
