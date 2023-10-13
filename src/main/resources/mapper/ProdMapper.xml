@@ -62,4 +62,11 @@
                 #{prod_num})
     </insert>
 
+    <select id="cartList" resultType="ProdVO">
+        SELECT * FROM cart c
+        left join prod p
+        on c.prod_num = p.prod_num
+        where c.username = #{username};
+    </select>
+
 </mapper>

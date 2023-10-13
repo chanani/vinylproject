@@ -21,5 +21,7 @@ public class ProdVO {
     private Integer prod_num;
 
 
+    private Integer prod_count;
+
 
 }

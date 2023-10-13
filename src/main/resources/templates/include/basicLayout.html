@@ -57,27 +57,32 @@
                     <span class="close" onclick="closeModal()">&times;</span>
                 </div>
                 <div class="login_box">
-                    <div class="login_write">
-                        <p>ID</p>
-                        <div class="login_write_id" >
-                            <input type="text" placeholder="아이디를 입력하세요.">
+                    <form action="">
+
+                        <div class="login_write">
+                            <p>ID</p>
+                            <div class="login_write_id" >
+                                <input type="text" placeholder="아이디를 입력하세요.">
+                            </div>
+                            <p>PASSWORD</p>
+                            <div class="login_write_pw">
+                                <input type="password" placeholder="비밀번호를 입력하세요.">
+                            </div>
                         </div>
-                        <p>PASSWORD</p>
-                        <div class="login_write_pw">
-                            <input type="password" placeholder="비밀번호를 입력하세요.">
+                        <div class="login_row_box">
+                            <div class="forget_box">
+                                <a href="#">아이디 </a>/
+                                <a href="#">비밀번호찾기</a>
+                            </div>
+                            <input type="checkbox" value="" class="memory_name">
+                            <p>아이디저장</p>
                         </div>
-                    </div>
-                    <div class="login_row_box">
-                        <div class="forget_box">
-                            <a href="#">아이디 </a>/
-                            <a href="#">비밀번호찾기</a>
+                        <div class="login_btn_box">
+                            <input type="submit" value="Login" class="login_btn">
                         </div>
-                        <input type="checkbox" value="" class="memory_name">
-                        <p>아이디저장</p>
-                    </div>
-                    <div class="login_btn_box">
-                        <input type="submit" value="Login" class="login_btn">
-                    </div>
+
+                    </form>
+
                     <div class="login_join">
                         <a href="">회원가입</a>
                     </div>

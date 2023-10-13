@@ -109,4 +109,9 @@ public class ProdServiceImpl implements ProdService{
     public int addCart(Integer prod_num, Integer amount) {
         return prodMapper.addCart(prod_num, amount);
     }
+
+    @Override
+    public ArrayList<ProdVO> cartList(String username) {
+        return prodMapper.cartList(username);
+    }
 }

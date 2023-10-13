@@ -75,7 +75,16 @@ public class ProdController {
     }
 
 
+    @RequestMapping("/cartList")
+    public String carList(/*@RequestParam("username") String username,*/
+                          Model model){
 
+        String username = "user";
+        ArrayList<ProdVO> list = prodService.cartList(username);
+        model.addAttribute("list", list);
+
+        return "/prod/cartPage";
+    }
 
 
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 
@@ -36,9 +37,24 @@ public class MainController {
     }
 
     @RequestMapping("/cartPage")
-    public String cartPage(){
+    public String cartPage(/*@RequestParam("username") String username,*/
+                           Model model){
+
+        String username = "user";
+        ArrayList<ProdVO> list = prodService.cartList(username);
+        int price_sum = 0;
+        for (int i = 0; i < list.size(); i++) {
+            price_sum += Integer.parseInt(list.get(i).getProd_price());
+        }
+        model.addAttribute("list", list);
+        model.addAttribute("price_sum", price_sum);
+
+
+
         return "/main/cartPage";
     }
+
+
 
 
 

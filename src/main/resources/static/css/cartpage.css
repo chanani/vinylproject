@@ -11,8 +11,10 @@
 .cart_box {overflow: hidden;}
 .cartImg {float: left; width: 20%;}
 .cartInfo {float: left; width: 60%;}
+.cartInfo > p {margin : 0 0 5px;}
 .cartPrice {float: right;}
-
+.prod_count {float: right;}
+.cartPrice > .prod_price {margin : 20px 0 10px 0}
 .result_box {overflow: hidden}
 
 .result_price {float: left}

@@ -16,6 +16,7 @@ public interface ProdMapper {
     public ArrayList<ProdVO> prodNewList (); // 메인페이지 new리스트
     public ProdVO prodDetail(Integer prod_num); // 상품 디테일 페이지
     public int addCart(@Param("prod_num") Integer prod_num, @Param("amount")Integer amount);
+    public ArrayList<ProdVO> cartList(String username);
 
 
 }

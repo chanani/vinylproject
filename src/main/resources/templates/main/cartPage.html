@@ -11,35 +11,35 @@
 
       <div class="pageHead">
         <h3>Your Cart</h3>
-        <p>1개 / 30,000원</p>
+        <p th:text="${#lists.size(list)} + '개 / ' + ${#numbers.formatInteger(price_sum, 0, 'COMMA')} + '원'"></p>
         <hr/>
       </div>
 
-      <div class="cart_box">
+
+      <div class="cart_box" th:each="vo, status : ${list}">
         <div class="cartImg">
           <img th:src="@{/img/vinyl2.png}" alt="image">
         </div>
         <div class="cartInfo">
-          <h3 class="prod_name">S.O.S</h3>
-          <p class="prod_singer">SZA</p>
-          <p class="prod_num">ItemNumber : 100</p>
+          <h3 class="prod_name">[[${vo.prod_name}]]</h3>
+          <p class="prod_singer">[[${vo.prod_singer}]]</p>
+          <p class="prod_num">ItemNumber : [[${vo.prod_num}]]</p>
           <p class="prod_text">Vinyl LP</p>
         </div>
 
         <div class="cartPrice">
-          <h4 class="prod_price">30,000원</h4>
-          <select class="prod_count" value="3">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
+          <h4 class="prod_price" th:text="${#numbers.formatInteger(vo.prod_price, 0, 'COMMA')} + '원'" > </h4>
+          <select class="prod_count" th:value="${vo.prod_count}">
+            <option th:each="stock : ${#numbers.sequence(1, vo.prod_stock)}" th:value="${stock}" th:text="${stock}"></option>
           </select>
         </div>
       </div>
+
       <hr/>
 
       <div class="result_box">
         <div class="result_price">
-          <h4>총 결제 금액 : 30,000원</h4>
+          <h4 th:text="'총 결제 금액 : ' + ${#numbers.formatInteger(price_sum, 0, 'COMMA')} + '원'" > </h4>
         </div>
 
         <div class="result_btn">
@@ -134,3 +134,4 @@
   });
 
 </script>
+
