@@ -49,9 +49,12 @@ public class MainController {
         model.addAttribute("list", list);
         model.addAttribute("price_sum", price_sum);
 
-
-
         return "/main/cartPage";
+    }
+
+    @RequestMapping("/joinpage")
+    public String joinpage(){
+        return "/main/joinPage";
     }
 
 

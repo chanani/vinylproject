@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<link rel="stylesheet" th:href="@{/css/joinpage.css}">
+
+
+<th:block th:replace="~{include/basicLayout :: setContent(~{::.wrap})}">
+
+  <div class="container wrap">
+    <div class="row">
+
+      <form action="/user/joinForm" name="frmJoin" class="frmJoin" method="post">
+        <h2 class="title">회원가입</h2>
+        <div class="username_box">
+          <input type="text" class="username" placeholder="아이디 입력(6~15자)" name="username" id="username">
+          <button class="overLop">중복 확인</button>
+        </div>
+        <div class="password_box">
+          <input type="password" class="password" placeholder="비밀번호 입력(문자, 특수문자 포함 8~20자)" name="password">
+        </div>
+        <div class="password_box2">
+          <input type="password" class="password2" placeholder="비밀번호 재입력" name="password2">
+        </div>
+        <div class="email_box">
+          <input type="text" placeholder="이메일 입력" name="user_email" class="email">
+          @
+          <select name="email_domain" class="email_domain">
+            <option value="naver.com">naver.com</option>
+            <option value="gmail.com">gmail.com</option>
+            <option value="daum.net">daum.net</option>
+          </select>
+        </div>
+        <div class="birth_box">
+          <input type="number" class="year" placeholder="년도" name="year">
+          <input type="number" class="month" placeholder="월" name="month">
+          <input type="number" class="day" placeholder="일" name="day">
+        </div>
+        <div class="phone_box">
+          <input type="tel" placeholder="휴대폰번호 입력('-' 제외 11자리 입력)" name="user_phone" class="phone">
+        </div>
+        <div class="address_box">
+          <input type="text" placeholder="주소 입력" name="user_add" class="address">
+        </div>
+        <div class="address_box2">
+          <input type="text" placeholder="상세주소 입력" name="address2" class="address2">
+        </div>
+        <div class="join_btn_box">
+          <input type="submit" value="가입하기" class="join_btn">
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+
+
+</th:block>
+
+
+</html>
+
+<script type="text/javascript" >
+  function overLap(e){
+    event.preventDefault();
+    let username = document.getElementById("username").value;
+    fetch("/user/checkId?username=" + username)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.text(); // 또는 response.json() 사용 가능
+            })
+            .then(data => {
+              alert(data)
+            })
+            .catch(error => {
+              console.error(error);
+            });
+  }
+</script>
+
