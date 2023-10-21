@@ -20,10 +20,12 @@ public class UserRestController {
     @GetMapping("/checkId")
     public String checkId(@RequestParam("username") String username){
         boolean result = Boolean.parseBoolean(userService.checkId(username));
+        System.out.println("컨트롤러 : " + username);
+        System.out.println("result : " + result);
         if (result == true) {
-            return "사용 가능한 아이디 입니다.";
-        } else {
             return "이미 사용 중인 아이디 입니다.";
+        } else {
+            return "사용 가능한 아이디 입니다.";
         }
 
     }

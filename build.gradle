@@ -36,7 +36,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.3.1'
     // testImplementation 'org.springframework.security:spring-security-test'
-
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation'
     // jdbc로그
     implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
 }

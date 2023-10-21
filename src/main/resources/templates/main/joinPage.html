@@ -12,11 +12,12 @@
       <form action="/user/joinForm" name="frmJoin" class="frmJoin" method="post">
         <h2 class="title">회원가입</h2>
         <div class="username_box">
-          <input type="text" class="username" placeholder="아이디 입력(6~15자)" name="username" id="username">
-          <button class="overLop">중복 확인</button>
+          <input type="text" class="username" placeholder="아이디 입력(6~15자)" name="username" id="username" th:value="${vo != null ? vo.username : '' }">
+          <button type="button" class="overLop" onclick="overLap(this.form)">중복 확인</button>
         </div>
+          <p class="error-message">[[${valid_username}]]</p>
         <div class="password_box">
-          <input type="password" class="password" placeholder="비밀번호 입력(문자, 특수문자 포함 8~20자)" name="password">
+          <input type="password" class="password" placeholder="비밀번호 입력(문자, 특수문자 포함 8~20자)" name="password" th:value="${vo != null ? vo.password : '' }">[[${valid_password}]]
         </div>
         <div class="password_box2">
           <input type="password" class="password2" placeholder="비밀번호 재입력" name="password2">
@@ -36,7 +37,7 @@
           <input type="number" class="day" placeholder="일" name="day">
         </div>
         <div class="phone_box">
-          <input type="tel" placeholder="휴대폰번호 입력('-' 제외 11자리 입력)" name="user_phone" class="phone">
+          <input type="tel" placeholder="휴대폰번호 입력('-' 제외 11자리 입력)" name="user_phone" class="phone" th:value="${vo != null ? vo.user_phone : '' }">[[${valid_user_phone}]]
         </div>
         <div class="address_box">
           <input type="text" placeholder="주소 입력" name="user_add" class="address">
@@ -71,7 +72,7 @@
               return response.text(); // 또는 response.json() 사용 가능
             })
             .then(data => {
-              alert(data)
+              document.querySelector('.error-message').textContent = data;
             })
             .catch(error => {
               console.error(error);

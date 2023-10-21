@@ -21,7 +21,9 @@
     </insert>
 
     <select id="checkId" resultType="String">
-
+        select IF(count(*) = 1, 'true', 'false') as result
+        from user
+        where username = #{username}
     </select>
 
 </mapper>
