@@ -85,3 +85,6 @@ input[type="number"]::-webkit-inner-spin-button {
     border-radius: 5px;
     border-color: white;
 }
+
+.error-message {color: #f55252
+}

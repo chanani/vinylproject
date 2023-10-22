@@ -1,6 +1,7 @@
 package com.vinyl.boot.controller;
 
 import com.vinyl.boot.command.UserVO;
+import com.vinyl.boot.command.ValidVO;
 import com.vinyl.boot.user.service.UserMapper;
 import com.vinyl.boot.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +28,24 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/joinForm")
-    public String joinForm(@Valid @ModelAttribute("vo") UserVO vo, Errors errors,
+    public String joinForm(@Valid @ModelAttribute("vo") ValidVO vo, Errors errors,
                            @RequestParam("email_domain") String email_domain,
                            @RequestParam("address2") String address2,
                            @RequestParam("year") String year,
                            @RequestParam("month") String month,
                            @RequestParam("day") String day,
-                            RedirectAttributes ra,
+                           @RequestParam("password2") String password2,
+                           UserVO userVO,
+                           RedirectAttributes ra,
                            Model model){
-        System.out.println("에러 여부 : " + errors.hasErrors());
+
+        model.addAttribute("year", year);
+        model.addAttribute("month", month);
+        model.addAttribute("day", day);
+        model.addAttribute("address2", address2);
+        model.addAttribute("email_domain", email_domain);
+
+
         if (errors.hasErrors()) { // 에러가 있다면 true, 없다면 false
 
             // 1. 유효성 검사에 실패한 에거 확인
@@ -54,16 +64,24 @@ public class UserController {
                     model.addAttribute("valid_" + err.getField(), err.getDefaultMessage());
                 }
             }
+
             return "/main/joinPage"; // 실패시 원래 화면으로
+        }
+        if (vo.getPassword() != password2){
+            model.addAttribute("valid_password2", "비밀번호가 일치하지 않습니다.");
+            return "/main/joinPage";
         }
 
         String email = vo.getUser_email() + "@" + email_domain;
         String birth = year + "/" + month + "/" + day;
         String address = vo.getUser_add() + " " + address2;
-        vo.setUser_birth(birth);
-        vo.setUser_add(address);
-        vo.setUser_email(email);
-        int result = userService.addJoin(vo);
+        userVO.setUsername(vo.getUsername());
+        userVO.setPassword(vo.getPassword());
+        userVO.setUser_phone(vo.getUser_phone());
+        userVO.setUser_birth(birth);
+        userVO.setUser_add(address);
+        userVO.setUser_email(email);
+        int result = userService.addJoin(userVO);
 
         String msg = result == 1 ? "회원가입이 완료되었습니다." : "회원가입에 실패하셨습니다.";
         ra.addFlashAttribute("msg", msg);

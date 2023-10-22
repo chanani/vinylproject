@@ -14,36 +14,45 @@
         <div class="username_box">
           <input type="text" class="username" placeholder="아이디 입력(6~15자)" name="username" id="username" th:value="${vo != null ? vo.username : '' }">
           <button type="button" class="overLop" onclick="overLap(this.form)">중복 확인</button>
+          <p class="error-message error-name">[[${valid_username}]]</p>
+
         </div>
-          <p class="error-message">[[${valid_username}]]</p>
         <div class="password_box">
-          <input type="password" class="password" placeholder="비밀번호 입력(문자, 특수문자 포함 8~20자)" name="password" th:value="${vo != null ? vo.password : '' }">[[${valid_password}]]
+          <input type="password" class="password" placeholder="비밀번호 입력(문자, 특수문자 포함 8~20자)" name="password" th:value="${vo != null ? vo.password : '' }">
+          <p class="error-message">[[${valid_password}]]</p>
+
         </div>
         <div class="password_box2">
-          <input type="password" class="password2" placeholder="비밀번호 재입력" name="password2">
+          <input type="password" class="password2" placeholder="비밀번호 재입력" name="password2" oninput="passCheck(event)">
+          <p class="error-message error-pw">[[${valid_password2}]]</p>
+
         </div>
         <div class="email_box">
-          <input type="text" placeholder="이메일 입력" name="user_email" class="email">
+          <input type="text" placeholder="이메일 입력" name="user_email" class="email" th:value="${vo != null ? vo.user_email : '' }">
           @
           <select name="email_domain" class="email_domain">
-            <option value="naver.com">naver.com</option>
-            <option value="gmail.com">gmail.com</option>
-            <option value="daum.net">daum.net</option>
+            <option value="naver.com" th:selected="${email_domain == 'naver.com'}">naver.com</option>
+            <option value="gmail.com" th:selected="${email_domain == 'gmail.com'}">gmail.com</option>
+            <option value="daum.net" th:selected="${email_domain == 'daum.net'}">daum.net</option>
           </select>
+          <p class="error-message">[[${valid_user_email}]]</p>
         </div>
         <div class="birth_box">
-          <input type="number" class="year" placeholder="년도" name="year">
-          <input type="number" class="month" placeholder="월" name="month">
-          <input type="number" class="day" placeholder="일" name="day">
+          <input type="number" class="year" placeholder="년도" name="year" min="1900" max="2300" step="1" th:value="${year != null ? year : '' }">
+          <input type="number" class="month" placeholder="월" name="month" min="1" max="12" step="1" th:value="${month != null ? month : '' }">
+          <input type="number" class="day" placeholder="일" name="day" min="1" max="31" step="1" th:value="${day != null ? day : '' }">
         </div>
         <div class="phone_box">
-          <input type="tel" placeholder="휴대폰번호 입력('-' 제외 11자리 입력)" name="user_phone" class="phone" th:value="${vo != null ? vo.user_phone : '' }">[[${valid_user_phone}]]
+          <input type="tel" placeholder="휴대폰번호 입력('-' 제외 11자리 입력)" name="user_phone" class="phone" th:value="${vo != null ? vo.user_phone : '' }">
+          <p class="error-message">[[${valid_user_phone}]]</p>
         </div>
         <div class="address_box">
-          <input type="text" placeholder="주소 입력" name="user_add" class="address">
+          <input type="text" placeholder="주소 입력" name="user_add" class="address" th:value="${vo != null ? vo.user_add : '' }">
+          <p class="error-message">[[${valid_user_add}]]</p>
+
         </div>
         <div class="address_box2">
-          <input type="text" placeholder="상세주소 입력" name="address2" class="address2">
+          <input type="text" placeholder="상세주소 입력" name="address2" class="address2" th:value="${address2 != null ? address2 : '' }">
         </div>
         <div class="join_btn_box">
           <input type="submit" value="가입하기" class="join_btn">
@@ -61,7 +70,7 @@
 </html>
 
 <script type="text/javascript" >
-  function overLap(e){
+  function overLap(e){ // 아이디 중복 여부 함수
     event.preventDefault();
     let username = document.getElementById("username").value;
     fetch("/user/checkId?username=" + username)
@@ -72,11 +81,31 @@
               return response.text(); // 또는 response.json() 사용 가능
             })
             .then(data => {
-              document.querySelector('.error-message').textContent = data;
+              if (data === 'true'){
+                document.querySelector('.error-message').textContent = "이미 사용 중인 아이디 입니다.";
+                document.querySelector('.error-name').style.color = "#f55252";
+              } else {
+                document.querySelector('.error-message').textContent = "사용 가능한 아이디 입니다.";
+                document.querySelector('.error-name').style.color = "green";
+                // document.getElementById("username").disabled = true;
+              }
             })
             .catch(error => {
               console.error(error);
             });
+  }
+
+  function passCheck(e){ // 비밀번호 확인 함수
+    let pw2Value = e.target.value;
+    let pw1Value = document.querySelector('.password').value;
+    if (pw1Value != pw2Value){
+      document.querySelector('.error-pw').textContent = "비밀번호가 일치하지 않습니다.";
+      document.querySelector('.error-pw').style.color = "#f55252";
+    } else {
+      document.querySelector('.error-pw').textContent = "비밀번호가 일치합니다.";
+      document.querySelector('.error-pw').style.color = "green"
+    }
+
   }
 </script>
 
