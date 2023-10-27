@@ -57,16 +57,16 @@
                     <span class="close" onclick="closeModal()">&times;</span>
                 </div>
                 <div class="login_box">
-                    <form action="">
+                    <form action="/user/login" method="post">
 
                         <div class="login_write">
                             <p>ID</p>
                             <div class="login_write_id" >
-                                <input type="text" placeholder="아이디를 입력하세요.">
+                                <input type="text" placeholder="아이디를 입력하세요." name="username">
                             </div>
                             <p>PASSWORD</p>
                             <div class="login_write_pw">
-                                <input type="password" placeholder="비밀번호를 입력하세요.">
+                                <input type="password" placeholder="비밀번호를 입력하세요." name="password">
                             </div>
                         </div>
                         <div class="login_row_box">
