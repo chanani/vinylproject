@@ -106,8 +106,8 @@ public class ProdServiceImpl implements ProdService{
     }
 
     @Override
-    public int addCart(Integer prod_num, Integer amount) {
-        return prodMapper.addCart(prod_num, amount);
+    public int addCart(Integer prod_num, String username, Integer amount) {
+        return prodMapper.addCart(prod_num, username, amount);
     }
 
     @Override

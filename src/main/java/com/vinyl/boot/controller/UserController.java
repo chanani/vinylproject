@@ -15,30 +15,49 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Controller
 @RequestMapping("/user")
-@SessionAttributes("username")
 public class UserController {
 
     @Autowired
     @Qualifier("userService")
     private UserService userService;
 
+    @Autowired
+    private HttpSession httpSession;
+    public static final String SESSION_COOKIE_NAME = "username";
     @PostMapping("/login")
     public String login(UserVO vo,
-                        RedirectAttributes ra, SessionStatus sessionStatus){
-        if (vo.getUsername() == null || vo.getPassword() == null){
+                        RedirectAttributes ra,
+                        HttpServletResponse response){
+        if ((vo.getUsername() == null|| vo.getUsername() == "") || (vo.getPassword() == null || vo.getPassword() == "")){
             String msg = "아이디와 비밀번호는 공백일 수 없습니다.";
             ra.addFlashAttribute("msg", msg);
             return "redirect:/";
         }
-        System.out.println(sessionStatus.toString());
 
-        return "redirect:/";
+        String password = userService.login(vo.getUsername());
+
+        if (vo.getPassword().equals(password)){
+            httpSession.setAttribute(SESSION_COOKIE_NAME, vo.getUsername());
+            String msg = vo.getUsername() + "님! 환영합니다^_^";
+            ra.addFlashAttribute("msg", msg);
+            return "redirect:/";
+        } else {
+            String msg = "비밀번호를 확인해주세요.";
+            ra.addFlashAttribute("msg", msg);
+            return "redirect:/";
+        }
     }
 
 
@@ -103,5 +122,10 @@ public class UserController {
         return "redirect:/";
     }
 
+    @RequestMapping("/test")
+    public void test (){
+        String username = (String) httpSession.getAttribute(SESSION_COOKIE_NAME);
+        System.out.println("username test : " + username);
+    }
 
 }

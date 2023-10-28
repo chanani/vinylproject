@@ -7,5 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserMapper {
     public int addJoin(UserVO vo);
     public String checkId(String username);
+    public String login(String username);
+
 
 }

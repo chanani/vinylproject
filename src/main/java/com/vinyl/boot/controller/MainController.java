@@ -11,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @Controller
@@ -21,6 +23,9 @@ public class MainController {
     @Autowired
     @Qualifier("prodService")
     private ProdService prodService;
+    @Autowired
+    private HttpSession httpSession;
+    public static final String SESSION_COOKIE_NAME = "username";
 
     @RequestMapping("")
     public String MainPage(Model model){
@@ -38,9 +43,16 @@ public class MainController {
 
     @RequestMapping("/cartPage")
     public String cartPage(/*@RequestParam("username") String username,*/
-                           Model model){
+                           Model model,
+                           RedirectAttributes ra){
 
-        String username = "user";
+        String username = (String) httpSession.getAttribute(SESSION_COOKIE_NAME);
+        if (username == null){
+            String msg = "로그인을 해주세요.";
+            ra.addFlashAttribute("msg", msg);
+            return "redirect:/";
+        }
+
         ArrayList<ProdVO> list = prodService.cartList(username);
         int price_sum = 0;
         for (int i = 0; i < list.size(); i++) {

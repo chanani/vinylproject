@@ -53,12 +53,12 @@
         select * from prod where prod_num = #{prod_num}
     </select>
 
-    <insert id="addCart" parameterType="int">
+    <insert id="addCart">
         insert into cart (prod_count,
                           username,
                           prod_num)
         values (#{amount},
-                "user",
+                #{username},
                 #{prod_num})
     </insert>
 

@@ -25,5 +25,8 @@
         from user
         where username = #{username}
     </select>
-
+    <select id="login" resultType="String">
+        select password From user
+        where username = #{username}
+    </select>
 </mapper>

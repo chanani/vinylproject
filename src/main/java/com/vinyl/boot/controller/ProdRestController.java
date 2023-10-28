@@ -8,19 +8,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+
 @RestController
 @RequestMapping("/prod")
 public class ProdRestController {
     @Autowired
     @Qualifier("prodService")
     private ProdService prodService;
-
+    @Autowired
+    private HttpSession httpSession;
+    public static final String SESSION_COOKIE_NAME = "username";
     @GetMapping("/addCart")
     public String addCart(@RequestParam("num") Integer num,
                           @RequestParam("amount") Integer amount){
-        System.out.println("addCart num : " + num);
-        System.out.println("addCart amount : " + amount);
-        int result = prodService.addCart(num, amount);
+        String username = (String) httpSession.getAttribute(SESSION_COOKIE_NAME);
+        if (username == null){
+            return "로그인 후 이용 가능합니다.";
+        }
+
+        int result = prodService.addCart(num, username, amount);
         System.out.println("성공 여부 : " + result);
 
         if (result == 1){

@@ -5,4 +5,5 @@ import com.vinyl.boot.command.UserVO;
 public interface UserService {
     public int addJoin(UserVO vo);
     public String checkId(String username);
+    public String login(String username);
 }
