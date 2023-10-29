@@ -32,11 +32,14 @@ public class MainController {
 
         ArrayList<ProdVO> list = prodService.prodList(); // 상품 리스트
         ArrayList<ProdVO> list2 = prodService.prodNewList(); // 상품 리스트
-
+        String username = (String) httpSession.getAttribute(SESSION_COOKIE_NAME);
+        System.out.println("username : " + username);
+        if (username != null){
+            model.addAttribute("session_username", username);
+        }
 
         model.addAttribute("list", list);
         model.addAttribute("list2", list2);
-
 
         return "/main/mainpage";
     }

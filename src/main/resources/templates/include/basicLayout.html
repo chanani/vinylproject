@@ -172,9 +172,12 @@
 </html>
 
 <script th:inline="javascript">
+
     let msg = '[[${msg}]]';
-    console.log(msg);
+    let username = '[[${session_username}]]';
+    console.log('username',username);
     if (msg !== 'null'){
         alert(msg);
     }
+
 </script>
