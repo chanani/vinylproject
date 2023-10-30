@@ -167,17 +167,20 @@
 
     </body>
 
+    <script th:inline="javascript">
+
+        let username;
+
+        let msg = '[[${msg}]]';
+        console.log(username);
+        if (msg !== 'null'){
+            alert(msg);
+        }
+
+    </script>
+
 </th:block>
 
 </html>
 
-<script th:inline="javascript">
 
-    let msg = '[[${msg}]]';
-    let username = '[[${session_username}]]';
-    console.log('username',username);
-    if (msg !== 'null'){
-        alert(msg);
-    }
-
-</script>

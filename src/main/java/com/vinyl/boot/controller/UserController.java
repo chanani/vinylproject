@@ -52,6 +52,8 @@ public class UserController {
             httpSession.setAttribute(SESSION_COOKIE_NAME, vo.getUsername());
             String msg = vo.getUsername() + "님! 환영합니다^_^";
             ra.addFlashAttribute("msg", msg);
+            String username = (String) httpSession.getAttribute("username");
+            ra.addFlashAttribute("session_username", username);
             return "redirect:/";
         } else {
             String msg = "비밀번호를 확인해주세요.";
