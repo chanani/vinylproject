@@ -62,6 +62,11 @@ public class UserController {
         }
     }
 
+    @RequestMapping("/logout")
+    public String logout(){
+        httpSession.removeAttribute("username");
+        return "redirect:/";
+    }
 
     @PostMapping("/joinForm")
     public String joinForm(@Valid @ModelAttribute("vo") ValidVO vo, Errors errors,

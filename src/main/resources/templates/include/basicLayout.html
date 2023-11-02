@@ -37,7 +37,7 @@
                 </nav>
                 <a th:href="@{/}" class="logo">oh, Universe</a>
                 <div class="icon_right">
-                    <a href="javascript:void(0);" onclick="openModal()"><i class="glyphicon glyphicon-user"></i></a>
+                    <a href="javascript:void(0);" onclick="openModal()"><i id="userIcon" class="glyphicon glyphicon-user"></i></a>
                     <a href="#"><i class="glyphicon glyphicon-heart"></i></a>
                     <a th:href="@{/cartPage}" ><i class="glyphicon glyphicon-shopping-cart"></i></a>
                 </div>
@@ -169,7 +169,7 @@
 
     <script th:inline="javascript">
 
-        let username;
+        let username = [[${session_username}]];
 
         let msg = '[[${msg}]]';
         console.log(username);
@@ -177,6 +177,32 @@
             alert(msg);
         }
 
+    </script>
+
+    <script>
+        if (username !== null) {
+            var userIcon = document.getElementById("userIcon");
+            userIcon.style.color = "#eab451";
+        }
+
+        var userIcon = document.getElementById("userIcon");
+        userIcon.addEventListener('click', function () {
+            if (username !== null) {
+                // 로그아웃 확인 창 띄우기
+                if (confirm("로그아웃 하시겠습니까?")) {
+                    window.location.href = "/user/logout";
+                }
+            } else {
+                openModal();
+            }
+        });
+
+        // 모달 창 열기 함수
+        function openModal() {
+            if (username === null) {
+                document.getElementById('myModal').style.display = 'block';
+            }
+        }
     </script>
 
 </th:block>
