@@ -114,4 +114,9 @@ public class ProdServiceImpl implements ProdService{
     public ArrayList<ProdVO> cartList(String username) {
         return prodMapper.cartList(username);
     }
+
+    @Override
+    public void deleteProd(String username, Integer prod_num) {
+        prodMapper.deleteProd(username, prod_num);
+    }
 }

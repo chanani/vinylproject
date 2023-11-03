@@ -23,7 +23,7 @@
         <div class="cartInfo">
           <h3 class="prod_name">[[${vo.prod_name}]]</h3>
           <p class="prod_singer">[[${vo.prod_singer}]]</p>
-          <p class="prod_num">ItemNumber : [[${vo.prod_num}]]</p>
+          <p class="prod_num" id="prod_num">ItemNumber : [[${vo.prod_num}]]</p>
           <p class="prod_text">Vinyl LP</p>
         </div>
 
@@ -32,6 +32,10 @@
           <select class="prod_count" th:value="${vo.prod_count}">
             <option th:each="stock : ${#numbers.sequence(1, vo.prod_stock)}" th:value="${stock}" th:text="${stock}"></option>
           </select>
+        </div>
+
+        <div class="delete_btn_box">
+          <button class="delete_btn" onclick="deleteHandle(this)">X</button>
         </div>
       </div>
 
@@ -132,6 +136,26 @@
     });
 
   });
+
+  // delete 버튼
+  const deleteHandle = (e) => {
+    console.log(e.target());
+    console.log(e);
+    // let prod_num =
+    // fetch("/prod/delete?prod_num=" + prod_num)
+    //         .then(response => {
+    //           if (!response.ok) {
+    //             throw new Error('Network response was not ok');
+    //           }
+    //           return response.text(); // 또는 response.json() 사용 가능
+    //         })
+    //         .then(data => {
+    //           alert(data)
+    //         })
+    //         .catch(error => {
+    //           console.error(error);
+    //         });
+  }
 
 </script>
 

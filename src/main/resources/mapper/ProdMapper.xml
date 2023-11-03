@@ -69,4 +69,10 @@
         where c.username = #{username};
     </select>
 
+    <delete id="deleteProd">
+        delete from cart
+        where username = #{username} and
+              prod_num = #{prod_num}
+    </delete>
+
 </mapper>

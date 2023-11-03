@@ -73,3 +73,21 @@
     /*transform: scale(0.9) translate(-55%, -55%);*/
     color: white;
 }
+
+.cart_box{
+    position: relative;
+}
+
+.delete_btn_box {
+    position: absolute;
+    bottom: 35px;
+    right: 0;
+}
+
+.delete_btn {
+    border: 1px solid gray;
+    width: 25px;
+    background-color: white;
+    border-radius: 5px;
+}
+

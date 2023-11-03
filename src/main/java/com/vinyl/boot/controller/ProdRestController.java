@@ -36,8 +36,13 @@ public class ProdRestController {
             return "상품이 장바구니에 등록되지 않았습니다.";
 
         }
+    }
 
-        //return "redirect:/prod/prodDetail?prod_num=" + num;
+    @GetMapping("/delete")
+    public String deleteProd(@RequestParam("prod_num") String prod_num){
+        String username = (String) httpSession.getAttribute(SESSION_COOKIE_NAME);
+
+        return "상품이 정상적으로 삭제되었습니다.";
     }
 
 }
