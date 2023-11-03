@@ -35,7 +35,7 @@
         </div>
 
         <div class="delete_btn_box">
-          <button class="delete_btn" onclick="deleteHandle(this)">X</button>
+          <button class="delete_btn" th:attr="data-prod-num=${vo.prod_num}" onclick="deleteHandle(this)">X</button>
         </div>
       </div>
 
@@ -139,22 +139,22 @@
 
   // delete 버튼
   const deleteHandle = (e) => {
-    console.log(e.target());
-    console.log(e);
-    // let prod_num =
-    // fetch("/prod/delete?prod_num=" + prod_num)
-    //         .then(response => {
-    //           if (!response.ok) {
-    //             throw new Error('Network response was not ok');
-    //           }
-    //           return response.text(); // 또는 response.json() 사용 가능
-    //         })
-    //         .then(data => {
-    //           alert(data)
-    //         })
-    //         .catch(error => {
-    //           console.error(error);
-    //         });
+    let prod_num = e.getAttribute("data-prod-num");
+    fetch("/prod/delete?prod_num=" + prod_num)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.text(); // 또는 response.json() 사용 가능
+            })
+            .then(data => {
+              alert(data);
+              window.location.reload();
+
+            })
+            .catch(error => {
+              console.error(error);
+            });
   }
 
 </script>

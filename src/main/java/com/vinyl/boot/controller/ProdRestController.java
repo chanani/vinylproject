@@ -39,8 +39,10 @@ public class ProdRestController {
     }
 
     @GetMapping("/delete")
-    public String deleteProd(@RequestParam("prod_num") String prod_num){
+    public String deleteProd(@RequestParam("prod_num") int prod_num){
         String username = (String) httpSession.getAttribute(SESSION_COOKIE_NAME);
+
+        prodService.deleteProd(username, prod_num);
 
         return "상품이 정상적으로 삭제되었습니다.";
     }
