@@ -69,7 +69,7 @@
                         <li class="item_vinyl" >
                             <a th:href="@{/prod/prodDetail(prod_num=${vo.prod_num})}" name="vinyl"><img th:src="@{/img/vinyl2.png}" alt=""></a>
                             <p>[[${vo.prod_singer}]]<br>[[${vo.prod_name}]]</p>
-                            <p>[[${vo.prod_price}]]원</p>
+                            <p class="price" th:text="${#numbers.formatInteger(vo.prod_price, 0, 'COMMA')} + '원'"></p>
                         </li>
                     </ul>
                 </div>
@@ -93,7 +93,7 @@
                         <li class="new_item_vinyl">
                             <a th:href="@{/prod/prodDetail(prod_num=${vo.prod_num})}" name="vinyl"><img th:src="@{/img/vinyl3.png}" alt=""></a>
                             <p>[[${vo.prod_singer}]]<br>[[${vo.prod_name}]]</p>
-                            <p>[[${vo.prod_price}]]원</p>
+                            <p class="price" th:text="${#numbers.formatInteger(vo.prod_price, 0, 'COMMA')} + '원'"></p>
                         </li>
                     </ul>
 

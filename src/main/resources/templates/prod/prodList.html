@@ -43,7 +43,7 @@
                             <a th:href="@{/prod/prodDetail(prod_num=${vo.prod_num})}"><img th:src="@{/img/item1.avif}" alt=""></a>
                             <h4>[[${vo.prod_name}]]</h4>
                             <p>[[${vo.prod_singer}]]</p>
-                            <p>[[${vo.prod_price}]]원</p>
+                            <p class="price" th:text="${#numbers.formatInteger(vo.prod_price, 0, 'COMMA')} + '원'"></p>
                         </div>
                     </div>
 

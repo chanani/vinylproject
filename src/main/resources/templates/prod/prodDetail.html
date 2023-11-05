@@ -37,7 +37,7 @@
           <hr style="margin-bottom: 0">
           <div class="price_amount">
             <div class="price_amount_left">
-              <p class="price">[[${vo.prod_price}]]원</p>
+              <p class="price" th:text="${#numbers.formatInteger(vo.prod_price, 0, 'COMMA')} + '원'"></p>
             </div>
             <div class="price_amount_right">
               <p>수량 : </p>
