@@ -75,4 +75,20 @@
               prod_num = #{prod_num}
     </delete>
 
+    <insert id="trackList_add" parameterType="java.util.ArrayList">
+        <selectKey keyProperty="prod_num" resultType="Integer" order="BEFORE">
+            SELECT MAX(prod_num) FROM prod
+        </selectKey>
+        <foreach collection="list_name" item="name" separator=";">
+            INSERT INTO trackList (track_name, prod_num)
+            VALUES (#{name}, #{prod_num})
+        </foreach>
+    </insert>
+
+
+
+
+
+
+
 </mapper>

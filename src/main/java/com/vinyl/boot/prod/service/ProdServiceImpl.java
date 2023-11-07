@@ -119,4 +119,9 @@ public class ProdServiceImpl implements ProdService{
     public void deleteProd(String username, Integer prod_num) {
         prodMapper.deleteProd(username, prod_num);
     }
+
+    @Override
+    public void trackList_add(ArrayList<String> list_name) {
+        prodMapper.trackList_add(list_name);
+    }
 }

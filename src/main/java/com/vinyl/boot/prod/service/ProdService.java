@@ -17,4 +17,5 @@ public interface ProdService {
     public int addCart(Integer prod_num, String username, Integer amount);
     public ArrayList<ProdVO> cartList(String username);
     public void deleteProd(String username, Integer prod_num);
+    public void trackList_add(ArrayList<String> list_name);
 }

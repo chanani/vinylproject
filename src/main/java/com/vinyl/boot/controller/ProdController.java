@@ -74,8 +74,11 @@ public class ProdController {
 //        int result1 = prodService.prodRegistImg(vo.getProd_name(), file);
 //        String msg = result == 1 ? "상품이 등록되었습니다." : "상품 등록에 실패하였습니다.";
 //        ra.addFlashAttribute("msg", msg);
-        System.out.println(Arrays.toString(track_num));
-        System.out.println(Arrays.toString(track_name));
+        ArrayList<String> list_name = new ArrayList();
+        for (int i = 0; i < track_name.length; i++) {
+            list_name.add(track_name[i]);
+        }
+        prodService.trackList_add(list_name);
 
         return "redirect:/prod/prodList";
     }

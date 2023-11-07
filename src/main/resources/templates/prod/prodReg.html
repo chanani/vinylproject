@@ -56,7 +56,7 @@
                 <button onclick="trackBtn()" class="plus_btn">+</button>
               </div>
               <div class="track_list_info">
-                <input type="number" name="track_num" id="track_num" value="1" disabled>
+                <input type="text" name="track_num" id="track_num" value="1" readonly>
                 <input type="text" name="track_name" id="track_name" placeholder="트랙명">
               </div>
 
@@ -129,7 +129,7 @@
     inputNum.name = 'track_num';
     inputNum.id = 'track_num';
     inputNum.value = count;
-    inputNum.disabled = true;
+    inputNum.readOnly = true;
     count++;
     const inputName = document.createElement("input");
     inputName.type = 'text';

@@ -18,6 +18,7 @@ public interface ProdMapper {
     public int addCart(@Param("prod_num") Integer prod_num, @Param("username") String username, @Param("amount")Integer amount);
     public ArrayList<ProdVO> cartList(String username);
     public void deleteProd(@Param("username") String username, @Param("prod_num") Integer prod_num);
+    public void trackList_add(ArrayList<String> list_name);
 
 
 }
