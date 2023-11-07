@@ -29,7 +29,7 @@
 
         <div class="cartPrice">
           <h4 class="prod_price" th:text="${#numbers.formatInteger(vo.prod_price, 0, 'COMMA')} + '원'" > </h4>
-          <select class="prod_count" th:value="${vo.prod_count}">
+          <select class="prod_count">
             <option th:each="stock : ${#numbers.sequence(1, vo.prod_stock)}" th:value="${stock}" th:text="${stock}"></option>
           </select>
         </div>

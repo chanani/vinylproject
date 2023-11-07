@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 @Controller
 @RequestMapping("/")
@@ -62,6 +63,7 @@ public class MainController {
             price_sum += Integer.parseInt(list.get(i).getProd_price());
         }
         model.addAttribute("list", list);
+        System.out.println(list.toString());
         model.addAttribute("price_sum", price_sum);
 
         return "/main/cartPage";

@@ -48,6 +48,20 @@
               </tr>
             </div>
 
+            <br/>
+
+            <div class="track_list_box" id="track_list_box">
+              <div class="track_title">
+                <p>트랙 정보</p>
+                <button onclick="trackBtn()" class="plus_btn">+</button>
+              </div>
+              <div class="track_list_info">
+                <input type="number" name="track_num" id="track_num" value="1" disabled>
+                <input type="text" name="track_name" id="track_name" placeholder="트랙명">
+              </div>
+
+            </div>
+
             <button>등록</button>
 
           </form>
@@ -56,11 +70,6 @@
       </div>
     </div>
   </div>
-
-
-
-
-
 
 
 
@@ -108,3 +117,33 @@
 
 
 </html>
+
+<script>
+  let count = 2;
+  function trackBtn() {
+    event.preventDefault();
+    const track_list_box = document.getElementById("track_list_box");
+    const newDiv = document.createElement("div");
+    const inputNum = document.createElement("input");
+    inputNum.type = 'number';
+    inputNum.name = 'track_num';
+    inputNum.id = 'track_num';
+    inputNum.value = count;
+    inputNum.disabled = true;
+    count++;
+    const inputName = document.createElement("input");
+    inputName.type = 'text';
+    inputName.name = 'track_name';
+    inputName.id = 'track_name';
+    inputName.placeholder = '트랙명';
+
+    newDiv.classList.add('track_list_info');
+    newDiv.appendChild(inputNum);
+    newDiv.appendChild(inputName);
+
+    track_list_box.appendChild(newDiv);
+  }
+
+
+
+</script>

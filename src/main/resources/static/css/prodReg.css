@@ -11,3 +11,31 @@
  }
 
  .info {text-align: center;}
+
+ .track_list_box {
+     margin-left: 20px;
+     margin-bottom: 30px;
+ }
+.track_title {
+    overflow: hidden;
+}
+.track_title > p, button {
+    float: left;
+}
+
+.plus_btn {
+    width: 30px;
+    margin-left: 15px;
+}
+
+#track_num {
+    width : 40px;
+    text-align: center;
+}
+#track_name {
+    width: 300px;
+}
+
+.track_list_info {
+    padding-bottom: 5px;
+}
