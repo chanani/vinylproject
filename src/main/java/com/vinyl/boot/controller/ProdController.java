@@ -1,5 +1,6 @@
 package com.vinyl.boot.controller;
 
+import com.vinyl.boot.command.ProdImgVO;
 import com.vinyl.boot.command.ProdVO;
 import com.vinyl.boot.prod.service.ProdService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ public class ProdController {
         ArrayList<ProdVO> list = prodService.prodList();
         model.addAttribute("list", list);
 
+        // System.out.println("imgname : " +list.get(0).getProdImgVO().getImg_name());
         return "/prod/prodList";
     }
 
@@ -42,7 +44,12 @@ public class ProdController {
     public String prodDetail(@RequestParam("prod_num") Integer prod_num,
                              Model model){
         ProdVO vo = prodService.prodDetail(prod_num);
+        ProdImgVO imgVO = prodService.prodDetailImg(prod_num);
+        ArrayList<ProdImgVO> subImgList = prodService.prodDetailSubImg(prod_num);
         model.addAttribute("vo", vo);
+        model.addAttribute("imgVO", imgVO);
+        model.addAttribute("subImgList", subImgList);
+
         return "prod/prodDetail";
     }
 
@@ -57,23 +64,23 @@ public class ProdController {
                              RedirectAttributes ra,
                              @RequestParam("track_num") Integer[] track_num,
                              @RequestParam("track_name") String[] track_name){
-//        for (int i = 0; i < file.size(); i++) {
-//            if (file.get(i).getOriginalFilename() == ""){
-//                file.remove(i);
-//                i--;
-//            }
-//        }
-//
-//        if (file.get(0).getContentType().contains("image") == false) {
-//            ra.addFlashAttribute("msg", "jpg, png, jpeg 형식의 이미지 파일만 등록이 가능합니다.");
-//            return "redirect:/prod/prodList"; //이미지가 아니라면 list목록으로
-//        }
-//
-//
-//        int result = prodService.prodRegist(vo);
-//        int result1 = prodService.prodRegistImg(vo.getProd_name(), file);
-//        String msg = result == 1 ? "상품이 등록되었습니다." : "상품 등록에 실패하였습니다.";
-//        ra.addFlashAttribute("msg", msg);
+        for (int i = 0; i < file.size(); i++) {
+            if (file.get(i).getOriginalFilename() == ""){
+                file.remove(i);
+                i--;
+            }
+        }
+
+        if (file.get(0).getContentType().contains("image") == false) {
+            ra.addFlashAttribute("msg", "jpg, png, jpeg 형식의 이미지 파일만 등록이 가능합니다.");
+            return "redirect:/prod/prodList"; //이미지가 아니라면 list목록으로
+        }
+
+
+        int result = prodService.prodRegist(vo);
+        int result1 = prodService.prodRegistImg(vo.getProd_name(), file);
+        String msg = result == 1 ? "상품이 등록되었습니다." : "상품 등록에 실패하였습니다.";
+        ra.addFlashAttribute("msg", msg);
         ArrayList<String> list_name = new ArrayList();
         for (int i = 0; i < track_name.length; i++) {
             list_name.add(track_name[i]);

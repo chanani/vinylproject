@@ -42,7 +42,12 @@
     </insert>
 
     <select id="prodList" resultType="ProdVO">
-        select * from prod
+        select p.prod_num, p.prod_name, p.prod_singer, p.prod_price, i.img_name, i.img_uuid, i.img_path
+        from prod p
+                 left join image i
+                           on p.prod_num = i.prod_num
+        where i.img_type = '대표이미지';
+
     </select>
 
     <select id="prodNewList" resultType="ProdVO">
@@ -51,6 +56,16 @@
 
     <select id="prodDetail" resultType="ProdVO">
         select * from prod where prod_num = #{prod_num}
+    </select>
+
+    <select id="prodDetailImg" resultType="ProdImgVO">
+        select * From image
+        where prod_num = #{prod_num} and img_type = '대표이미지'
+    </select>
+
+    <select id="prodDetailSubImg" resultType="ProdImgVO">
+        select * From image
+        where prod_num = #{prod_num} and img_type = '상세이미지'
     </select>
 
     <insert id="addCart">

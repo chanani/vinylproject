@@ -53,6 +53,7 @@
     <div class="container wrap">
         <div class="rows">
             <div class="item_box">
+
                 <div class="item_menu_bar">
                     <ul class="item_menu_list">
                         <a href="#">Recommendations</a>
@@ -62,7 +63,6 @@
                         <a href="#">Top Seller</a>
                     </ul>
                 </div>
-
 
                 <div class="item_box_id">
                     <ul class="item_list" th:each="vo, status : ${list}" th:if="${status.index} < 10">
@@ -75,8 +75,8 @@
                         </li>
                     </ul>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
 
@@ -89,8 +89,8 @@
                         <h2>New Vinyl</h2>
                     </ul>
                 </div>
-                <div class="new_item_box_id">
 
+                <div class="new_item_box_id">
                     <ul class="new_item_list" th:each="vo, status : ${list2}" th:if="${status.index} < 5">
                         <li class="new_item_vinyl">
                             <a th:href="@{/prod/prodDetail(prod_num=${vo.prod_num})}" name="vinyl">
@@ -100,8 +100,8 @@
                             <p class="price" th:text="${#numbers.formatInteger(vo.prod_price, 0, 'COMMA')} + '원'"></p>
                         </li>
                     </ul>
-
                 </div>
+
             </div>
 
         </div>

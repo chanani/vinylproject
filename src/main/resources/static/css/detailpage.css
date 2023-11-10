@@ -127,7 +127,7 @@ header .lower .inset > .menu_bar > a:hover {color: black;}
 .product {overflow: hidden; margin: 0 auto; width: 970px; padding-top: 30px; box-sizing: border-box;}
 .product .product_img {float: left; width: 50%; padding: 10px; }
 .product .product_content {float: left; width: 50%;height: auto; padding: 10px;}
-.product .product_img .product_main_img > img{height: 475px;}
+.product .product_img .product_main_img > img{height: 475px; padding: 0 50px 10px 0}
 .product .product_content .singer { margin: 0; font-size: 30px;}
 .product .product_content .title { margin: 0; font-size: 20px;}
 .product .product_content .item_number {color: #838282; }
@@ -148,9 +148,9 @@ header .lower .inset > .menu_bar > a:hover {color: black;}
 .product .product_content .product_info .product_content_read > p {word-wrap: break-word;}
 .product .product_img .track_list > p{font-size: 13px; color: #9d9d9d;}
 .product .product_img .track_list > hr {margin:15px 0;}
-.product .product_img .product_sub_img {overflow: hidden; padding: 10px 0 20px 0;}
-.product .product_img .product_sub_img > a{float: left; width: 25%;}
-.product .product_img .product_sub_img > a > img {height: 75px;}
+/* sub img */
+.product .product_img .product_sub_img {overflow: hidden; padding: 0 0 20px 0;}
+.product .product_img .product_sub_img > img {float: left; width: 100px; height: 100px; padding: 3px}
 
 
 
@@ -208,5 +208,5 @@ footer .ft_banner .banner_right > li {
 
 footer .ft_banner {overflow: hidden;  padding: 50px 97px 0;}
 footer .ft_banner .banner_left {float:Left}
-footer .ft_banner .banner_right{float:light; overflow: hidden;}
+footer .ft_banner .banner_right{float: right; overflow: hidden;}
 footer .ft_banner .banner_right > li{float: left; padding-left: 15px; }

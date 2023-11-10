@@ -20,8 +20,8 @@ public class ProdVO {
     private String prod_category;
     private Integer prod_num;
 
-
     private Integer prod_count;
 
+    private ProdImgVO prodImgVO;
 
 }

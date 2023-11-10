@@ -11,13 +11,15 @@
       <div class="product">
         <div class="product_img">
           <div class="product_main_img">
-            <img th:src="@{/img/product_img/main5.png}" alt="">
+            <img th:src="@{'/uploadImg/' + ${imgVO.img_path} + '/' + ${imgVO.img_uuid} + '_' + ${imgVO.img_name}}" alt="">
           </div>
+
           <div class="product_sub_img">
-            <a href=""><img th:src="@{/img/product_img/sub1.png}" alt=""></a>
-            <a href=""><img th:src="@{/img/product_img/sub2.png}" alt=""></a>
-            <a href=""><img th:src="@{/img/product_img/sub3.png}" alt=""></a>
+            <img th:each="imgVO, status : ${subImgList}"
+                 th:src="@{'/uploadImg/' + ${imgVO.img_path} + '/' + ${imgVO.img_uuid} + '_' + ${imgVO.img_name}}"
+                 alt="" th:alt="${imgVO.img_name}">
           </div>
+
           <div class="track_list">
             <p>A1 : happy</p>
             <hr>

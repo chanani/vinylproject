@@ -106,6 +106,16 @@ public class ProdServiceImpl implements ProdService{
     }
 
     @Override
+    public ProdImgVO prodDetailImg(Integer prod_num) {
+        return prodMapper.prodDetailImg(prod_num);
+    }
+
+    @Override
+    public ArrayList<ProdImgVO> prodDetailSubImg(Integer prod_num) {
+        return prodMapper.prodDetailSubImg(prod_num);
+    }
+
+    @Override
     public int addCart(Integer prod_num, String username, Integer amount) {
         return prodMapper.addCart(prod_num, username, amount);
     }
