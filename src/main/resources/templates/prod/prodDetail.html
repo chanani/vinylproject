@@ -41,11 +41,8 @@
             </div>
             <div class="price_amount_right">
               <p>수량 : </p>
-              <select name="amount" id="amount">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
+              <select class="prod_count" name="amount" id="amount">
+                <option th:each="stock : ${#numbers.sequence(1, vo.prod_stock)}" th:value="${stock}" th:text="${stock}"></option>
               </select>
             </div>
           </div>
