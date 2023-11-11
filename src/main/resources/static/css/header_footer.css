@@ -50,7 +50,8 @@ header .upper .inset .search > input {
     outline: none;
     color: #ddd;
 }
-header .upper .inset .search > i {
+
+header .upper .inset .search > a > i {
     display: inline-block;
     font-size: 20px;
     color: #ddd;

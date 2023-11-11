@@ -96,6 +96,11 @@ public class ProdServiceImpl implements ProdService{
     }
 
     @Override
+    public ArrayList<ProdImgVO> prodListImg() {
+        return prodMapper.prodListImg();
+    }
+
+    @Override
     public ArrayList<ProdVO> prodNewList() {
         return prodMapper.prodNewList();
     }
@@ -123,6 +128,11 @@ public class ProdServiceImpl implements ProdService{
     @Override
     public ArrayList<ProdVO> cartList(String username) {
         return prodMapper.cartList(username);
+    }
+
+    @Override
+    public ArrayList<ProdImgVO> cartListImg(String username) {
+        return prodMapper.cartListImg(username);
     }
 
     @Override

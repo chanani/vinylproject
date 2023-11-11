@@ -33,6 +33,9 @@ public class MainController {
 
         ArrayList<ProdVO> list = prodService.prodList(); // 상품 리스트
         ArrayList<ProdVO> list2 = prodService.prodNewList(); // 상품 리스트
+        ArrayList<ProdImgVO> imgList = prodService.prodListImg();
+        ArrayList<ProdImgVO> imgList2 = prodService.prodListImg();
+
         String username = (String) httpSession.getAttribute(SESSION_COOKIE_NAME);
         System.out.println("username : " + username);
         if (username != null){
@@ -41,6 +44,8 @@ public class MainController {
 
         model.addAttribute("list", list);
         model.addAttribute("list2", list2);
+        model.addAttribute("imgList", imgList);
+        model.addAttribute("imgList2", imgList2);
 
         return "/main/mainpage";
     }
@@ -56,16 +61,19 @@ public class MainController {
             ra.addFlashAttribute("msg", msg);
             return "redirect:/";
         }
-
         ArrayList<ProdVO> list = prodService.cartList(username);
+        ArrayList<ProdImgVO> imgList = prodService.cartListImg(username);
+
         int price_sum = 0;
+        int cart_count = 0;
         for (int i = 0; i < list.size(); i++) {
-            price_sum += Integer.parseInt(list.get(i).getProd_price());
+            price_sum += Integer.parseInt(list.get(i).getProd_price()) * list.get(i).getProd_count();
+            cart_count += list.get(i).getProd_count();
         }
         model.addAttribute("list", list);
-        System.out.println(list.toString());
+        model.addAttribute("imgList", imgList);
         model.addAttribute("price_sum", price_sum);
-
+        model.addAttribute("cart_count", cart_count);
         return "/main/cartPage";
     }
 

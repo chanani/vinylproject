@@ -11,14 +11,18 @@
 
       <div class="pageHead">
         <h3>Your Cart</h3>
-        <p th:text="${#lists.size(list)} + '개 / ' + ${#numbers.formatInteger(price_sum, 0, 'COMMA')} + '원'"></p>
+        <p th:text="${cart_count} + '개 / ' + ${#numbers.formatInteger(price_sum, 0, 'COMMA')} + '원'"></p>
         <hr/>
       </div>
 
 
-      <div class="cart_box" th:each="vo, status : ${list}">
+      <div class="cart_box" th:each="vo, prodIndex : ${list}">
         <div class="cartImg">
-          <img th:src="@{/img/vinyl2.png}" alt="image">
+          <a th:each="image, imageIndex : ${imgList}" th:if="${imageIndex.index == prodIndex.index}"
+             th:href="@{/prod/prodDetail(prod_num=${vo.prod_num})}" name="vinyl">
+            <img th:src="@{'/uploadImg/' + ${image.img_path} + '/' + ${image.img_uuid} + '_' + ${image.img_name}}"
+                 alt="" th:alt="${image.img_name}">
+          </a>
         </div>
         <div class="cartInfo">
           <h3 class="prod_name">[[${vo.prod_name}]]</h3>
@@ -29,9 +33,9 @@
 
         <div class="cartPrice">
           <h4 class="prod_price" th:text="${#numbers.formatInteger(vo.prod_price, 0, 'COMMA')} + '원'" > </h4>
-          <select class="prod_count">
-            <option th:each="stock : ${#numbers.sequence(1, vo.prod_stock)}" th:value="${stock}" th:text="${stock}"></option>
-          </select>
+          <div class="prod_count">
+            <p>수량 : [[${vo.prod_count}]]</p>
+          </div>
         </div>
 
         <div class="delete_btn_box">

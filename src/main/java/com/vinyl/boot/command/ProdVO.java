@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,7 +23,7 @@ public class ProdVO {
     private Integer prod_num;
 
     private Integer prod_count;
+    private Date cart_reg;
 
-    private ProdImgVO prodImgVO;
 
 }

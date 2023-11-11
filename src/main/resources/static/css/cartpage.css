@@ -16,7 +16,7 @@
 .prod_count {float: right;}
 .cartPrice > .prod_price {margin : 20px 0 10px 0}
 .result_box {overflow: hidden}
-
+.cartImg img {height: 150px}
 .result_price {float: left}
 .result_btn {float : right}
 

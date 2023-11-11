@@ -34,9 +34,9 @@ public class ProdController {
     @RequestMapping("/prodList")
     public String prodList(Model model){
         ArrayList<ProdVO> list = prodService.prodList();
+        ArrayList<ProdImgVO> imgList = prodService.prodListImg();
         model.addAttribute("list", list);
-
-        // System.out.println("imgname : " +list.get(0).getProdImgVO().getImg_name());
+        model.addAttribute("imgList", imgList);
         return "/prod/prodList";
     }
 
@@ -91,21 +91,6 @@ public class ProdController {
     }
 
 
-    @RequestMapping("/cartList")
-    public String carList(/*@RequestParam("username") String username,*/
-                          Model model){
-
-        String username = "user";
-        ArrayList<ProdVO> list = prodService.cartList(username);
-        model.addAttribute("list", list);
-
-        return "/prod/cartPage";
-    }
-
-//    @GetMapping("/image/{id}")
-//    public ResponseEntity<byte[]> mainImg(){
-//        return  ;
-//    }
 
 
 }

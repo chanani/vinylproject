@@ -26,10 +26,10 @@
         </selectKey>
 
         insert into image (img_name,
-        img_uuid,
-        img_path,
-        img_type,
-        prod_num)
+                            img_uuid,
+                            img_path,
+                            img_type,
+                            prod_num)
         values
         <foreach collection="list" item="item" separator=",">
         (#{item.img_name,jdbcType=VARCHAR},
@@ -42,13 +42,15 @@
     </insert>
 
     <select id="prodList" resultType="ProdVO">
-        select p.prod_num, p.prod_name, p.prod_singer, p.prod_price, i.img_name, i.img_uuid, i.img_path
-        from prod p
-                 left join image i
-                           on p.prod_num = i.prod_num
-        where i.img_type = '대표이미지';
-
+        select * from prod order by prod_num DESC
     </select>
+
+    <select id="prodListImg" resultType="ProdImgVO">
+        select * from Image
+        where img_type = '대표이미지'
+        order by prod_num desc
+    </select>
+
 
     <select id="prodNewList" resultType="ProdVO">
         select * from prod order by prod_num DESC
@@ -71,17 +73,35 @@
     <insert id="addCart">
         insert into cart (prod_count,
                           username,
-                          prod_num)
+                          prod_num,
+                          cart_reg)
         values (#{amount},
                 #{username},
-                #{prod_num})
+                #{prod_num},
+                now())
     </insert>
 
     <select id="cartList" resultType="ProdVO">
         SELECT * FROM cart c
         left join prod p
         on c.prod_num = p.prod_num
-        where c.username = #{username};
+        where c.username = #{username}
+        order by cart_reg DESC
+    </select>
+
+    <select id="cartListImg" resultType="ProdImgVO">
+        SELECT i.prod_num,
+               i.img_name,
+               i.img_uuid,
+               i.img_path
+        FROM cart c
+           left join prod p
+                     on c.prod_num = p.prod_num
+           left join image i
+                     on p.prod_num = i.prod_num
+        where c.username = #{username}
+          and i.img_type = '대표이미지'
+        order by cart_reg DESC
     </select>
 
     <delete id="deleteProd">
