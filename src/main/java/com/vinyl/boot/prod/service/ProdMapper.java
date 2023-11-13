@@ -25,6 +25,8 @@ public interface ProdMapper {
 
     public void deleteProd(@Param("username") String username, @Param("prod_num") Integer prod_num);
     public void trackList_add(ArrayList<String> list_name);
+    public ArrayList<ProdVO> searchList(String search_data); // 검색 기능
+    public ArrayList<ProdImgVO> searchListImg(String search_data); // 검색 이미지
 
 
 }

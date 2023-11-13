@@ -120,7 +120,22 @@
         </foreach>
     </insert>
 
+    <select id="searchList" resultType="ProdVO">
+        SELECT * FROM prod
+        WHERE prod_name LIKE CONCAT('%', #{search_data}, '%')
+           OR prod_singer LIKE CONCAT('%', #{search_data}, '%')
+        order by prod_num desc
+    </select>
 
+    <select id="searchListImg" resultType="ProdImgVO">
+        SELECT i.img_name, i.img_uuid, i.img_path FROM prod p
+                left join image i
+                on p.prod_num = i.prod_num
+        WHERE (prod_name LIKE CONCAT('%', #{search_data}, '%')
+                   OR prod_singer LIKE CONCAT('%', #{search_data}, '%'))
+                   and i.img_type = '대표이미지'
+        order by p.prod_num desc
+    </select>
 
 
 

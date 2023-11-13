@@ -42,8 +42,10 @@
                     <a th:href="@{/cartPage}" ><i class="glyphicon glyphicon-shopping-cart"></i></a>
                 </div>
                 <div class="search">
-                    <input type="search" placeholder="Search" id="search-input">
-                    <a href="#"><i class="glyphicon glyphicon-search"></i></a>
+                    <form th:action="@{/prod/prodList}">
+                        <input type="search" placeholder="Search" id="search-input" name="search_data">
+                        <button type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -105,7 +107,7 @@
         <div class="lower">
             <div class="inset">
                 <nav class="menu_bar">
-                    <a th:href="@{/prod/prodList}">New In</a>
+                    <a th:href="@{/prod/prodList(search_data=)}">New In</a>
                     <a href="item_listpage.html">Top 100</a>
                     <a href="#">Exclusives</a>
                     <a href="#">Genres</a>

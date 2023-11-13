@@ -38,7 +38,7 @@ header .upper .inset .icon_right{position: absolute; top: 5px; right: 0; line-he
 header .upper .inset .icon_right > a{font-size: 22px; color: #ddd; margin-left: 15px;}
 header .upper .inset .logo {color: #ddd; font-size: 40px; font-weight: 700; text-decoration: none; line-height:100px}
 header .upper .inset .search {position: absolute; bottom: 15px; right: 0; box-sizing: border-box;}
-header .upper .inset .search > input {
+header .upper .inset .search  input {
     display: inline-block;
     width: 150px;
     box-sizing: border-box;
@@ -52,11 +52,16 @@ header .upper .inset .search > input {
     outline: none;
     color: #ddd;
 }
-header .upper .inset .search > i {
+header .upper .inset .search  i {
     display: inline-block;
     font-size: 20px;
     color: #ddd;
     margin-left: 10px;
+}
+
+.search > form > button {
+    background: none;
+    border: none;
 }
 
 /* lower */
@@ -158,6 +163,9 @@ header .lower .inset > .menu_bar > a:hover {
 .container .new_item_box_id .new_item_list .new_item_vinyl{
     margin: 5px;
 }
+
+
+
 
 /* footer */
 

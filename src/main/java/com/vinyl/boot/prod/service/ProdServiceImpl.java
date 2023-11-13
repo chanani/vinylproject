@@ -144,4 +144,14 @@ public class ProdServiceImpl implements ProdService{
     public void trackList_add(ArrayList<String> list_name) {
         prodMapper.trackList_add(list_name);
     }
+
+    @Override
+    public ArrayList<ProdVO> searchList(String search_data) {
+        return prodMapper.searchList(search_data);
+    }
+
+    @Override
+    public ArrayList<ProdImgVO> searchListImg(String search_data) {
+        return prodMapper.searchListImg(search_data);
+    }
 }

@@ -32,12 +32,27 @@ public class ProdController {
     private String uploadPath;
 
     @RequestMapping("/prodList")
-    public String prodList(Model model){
-        ArrayList<ProdVO> list = prodService.prodList();
-        ArrayList<ProdImgVO> imgList = prodService.prodListImg();
-        model.addAttribute("list", list);
-        model.addAttribute("imgList", imgList);
-        return "/prod/prodList";
+    public String prodList(Model model,
+                           @RequestParam("search_data") String search_data){
+        System.out.println("searchData : " + search_data);
+        if (search_data == null || search_data == "") {
+            ArrayList<ProdVO> list = prodService.prodList();
+            ArrayList<ProdImgVO> imgList = prodService.prodListImg();
+            model.addAttribute("list", list);
+            model.addAttribute("imgList", imgList);
+            return "/prod/prodList";
+        } else {
+            ArrayList<ProdVO> list = prodService.searchList(search_data);
+            ArrayList<ProdImgVO> imgList = prodService.searchListImg(search_data);
+            model.addAttribute("list", list);
+            model.addAttribute("imgList", imgList);
+            for (int i = 0; i < imgList.size(); i++) {
+                System.out.println("imgList : " + imgList.get(i).getImg_name());
+            }
+            return "/prod/prodList";
+        }
+
+
     }
 
     @RequestMapping("/prodDetail")

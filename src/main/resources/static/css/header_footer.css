@@ -51,7 +51,7 @@ header .upper .inset .search > input {
     color: #ddd;
 }
 
-header .upper .inset .search > a > i {
+header .upper .inset .search  a > i {
     display: inline-block;
     font-size: 20px;
     color: #ddd;
