@@ -3,26 +3,23 @@ package com.vinyl.boot.controller;
 import com.vinyl.boot.prod.service.ProdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/prod")
+@RequestMapping("/cart")
 public class ProdRestController {
     @Autowired
     @Qualifier("prodService")
     private ProdService prodService;
-    @Autowired
-    private HttpSession httpSession;
+
     public static final String SESSION_COOKIE_NAME = "username";
-    @GetMapping("/addCart")
-    public String addCart(@RequestParam("num") Integer num,
-                          @RequestParam("amount") Integer amount){
-        String username = (String) httpSession.getAttribute(SESSION_COOKIE_NAME);
+    @PostMapping("/addCart")
+    public String addCart(@RequestParam Integer num,
+                          @RequestParam Integer amount,
+                          @RequestParam String username){
+
         if (username == null){
             return "로그인 후 이용 가능합니다.";
         }
@@ -38,9 +35,9 @@ public class ProdRestController {
         }
     }
 
-    @GetMapping("/delete")
-    public String deleteProd(@RequestParam("prod_num") int prod_num){
-        String username = (String) httpSession.getAttribute(SESSION_COOKIE_NAME);
+    @PostMapping("/delete")
+    public String deleteProd(@RequestParam("prod_num") int prod_num,
+                             @RequestParam String username){
 
         prodService.deleteProd(username, prod_num);
 

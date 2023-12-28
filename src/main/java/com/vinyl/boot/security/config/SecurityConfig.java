@@ -66,17 +66,7 @@ public class SecurityConfig {
 
 
         http.requestMatchers()
-                .antMatchers("/admin/**")
-                .antMatchers("/AssetRequest/**")
-                .antMatchers("/UserRequest/**")
-                .antMatchers("/categories/**")
-                .antMatchers("/itassets/**")
-                .antMatchers("/stock/**")
-                .antMatchers("/mainPage/**")
-                .antMatchers("/reports/**")
-                .antMatchers("/noticelist/**")
-                .antMatchers("/noticeUser/**")
-                .antMatchers("/user/**")
+                //.antMatchers("/cart/**")
                 .and()
                 .addFilter(new JwtAuthorizationFilter(authenticationManager));
 

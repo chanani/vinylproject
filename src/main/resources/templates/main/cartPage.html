@@ -144,7 +144,13 @@
   // delete 버튼
   const deleteHandle = (e) => {
     let prod_num = e.getAttribute("data-prod-num");
-    fetch("/prod/delete?prod_num=" + prod_num)
+    fetch("/cart/delete", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `prod_num=${prod_num}&username=${username}`
+    })
             .then(response => {
               if (!response.ok) {
                 throw new Error('Network response was not ok');

@@ -40,7 +40,7 @@
                     <a href="javascript:void(0);" onclick="openModal()"><i id="userIcon"
                                                                            class="glyphicon glyphicon-user"></i></a>
                     <a href="#"><i class="glyphicon glyphicon-heart"></i></a>
-                    <a th:href="@{/cartPage}"><i class="glyphicon glyphicon-shopping-cart"></i></a>
+                    <a href="#" onclick="cart_page(event)"><i class="glyphicon glyphicon-shopping-cart" ></i></a>
                 </div>
                 <div class="search">
                     <form th:action="@{/prod/prodList}">
@@ -178,6 +178,8 @@
     </script>
 
     <script>
+        let username = localStorage.getItem("username");
+        let token = localStorage.getItem("token");
         // 로그인
         function login() {
             const formData = new FormData();
@@ -219,9 +221,19 @@
                 console.error('로그인 요청 중 오류 발생:', error);
             }
 
-        }
+        };
 
-        let username = localStorage.getItem("username");
+        function cart_page (e){
+            e.preventDefault();
+            if (username == null){
+                alert('로그인 후 이용해주세요.');
+                return;
+            }
+
+            window.location = "/cartPage?username=" + username;
+        };
+
+
         let userIcon = document.getElementById("userIcon");
         userIcon.addEventListener('click', function () {
             if (username !== null) {

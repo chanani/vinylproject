@@ -6,70 +6,73 @@
 
 <th:block th:replace="~{include/basicLayout :: setContent(~{::.wrap})}">
 
-  <div class="container wrap">
-    <div class="row">
-      <div class="product">
-        <div class="product_img">
-          <div class="product_main_img">
-            <img th:src="@{'/uploadImg/' + ${imgVO.img_path} + '/' + ${imgVO.img_uuid} + '_' + ${imgVO.img_name}}" alt="">
-          </div>
+    <div class="container wrap">
+        <div class="row">
+            <div class="product">
+                <div class="product_img">
+                    <div class="product_main_img">
+                        <img th:src="@{'/uploadImg/' + ${imgVO.img_path} + '/' + ${imgVO.img_uuid} + '_' + ${imgVO.img_name}}"
+                             alt="">
+                    </div>
 
-          <div class="product_sub_img">
-            <img th:each="imgVO, status : ${subImgList}"
-                 th:src="@{'/uploadImg/' + ${imgVO.img_path} + '/' + ${imgVO.img_uuid} + '_' + ${imgVO.img_name}}"
-                 alt="" th:alt="${imgVO.img_name}">
-          </div>
+                    <div class="product_sub_img">
+                        <img th:each="imgVO, status : ${subImgList}"
+                             th:src="@{'/uploadImg/' + ${imgVO.img_path} + '/' + ${imgVO.img_uuid} + '_' + ${imgVO.img_name}}"
+                             alt="" th:alt="${imgVO.img_name}">
+                    </div>
 
-          <div class="track_list">
-            <p>A1 : happy</p>
-            <hr>
-            <p>A2 : S.O.S</p>
-            <hr>
-            <p>A3 : I Like you</p>
-            <hr>
-            <p>A4 : Bad guy</p>
-            <hr>
-            <p>A5 : Rainy</p>
-          </div>
+                    <div class="track_list">
+                        <p>A1 : happy</p>
+                        <hr>
+                        <p>A2 : S.O.S</p>
+                        <hr>
+                        <p>A3 : I Like you</p>
+                        <hr>
+                        <p>A4 : Bad guy</p>
+                        <hr>
+                        <p>A5 : Rainy</p>
+                    </div>
+                </div>
+                <div class="product_content">
+                    <p class="title">[[${vo.prod_name}]]</p>
+                    <p class="singer">[[${vo.prod_singer}]]</p>
+                    <p class="item_number">Item number : [[${vo.prod_num}]]</p>
+                    <hr style="margin-bottom: 0">
+                    <div class="price_amount">
+                        <div class="price_amount_left">
+                            <p class="price" th:text="${#numbers.formatInteger(vo.prod_price, 0, 'COMMA')} + '원'"></p>
+                        </div>
+                        <div class="price_amount_right">
+                            <p>수량 : </p>
+                            <select class="prod_count" name="amount" id="amount">
+                                <option th:each="stock : ${#numbers.sequence(1, vo.prod_stock)}" th:value="${stock}"
+                                        th:text="${stock}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <p class="post_price">배송비 : 3,000원</p>
+                    <div class="buy_btn_box">
+                        <button class="like_btn"><i class="glyphicon glyphicon glyphicon-heart-empty"></i></button>
+                        <button class="buy_btn"><i class="glyphicon glyphicon-hand-right"></i> 구매하기</button>
+                        <button class="cart_btn" onclick="cartHandle()"><i
+                                class="glyphicon glyphicon-shopping-cart"></i> 장바구니
+                        </button>
+                    </div>
+                    <div class="product_info">
+                        <p class="in_stock">· In Stock</p>
+                        <hr/>
+                        <h4>상품정보</h4>
+                        <div class="product_content_read">
+                            <p>
+                                [[${vo.prod_content}]]
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="product_content">
-          <p class="title">[[${vo.prod_name}]]</p>
-          <p class="singer">[[${vo.prod_singer}]]</p>
-          <p class="item_number">Item number : [[${vo.prod_num}]]</p>
-          <hr style="margin-bottom: 0">
-          <div class="price_amount">
-            <div class="price_amount_left">
-              <p class="price" th:text="${#numbers.formatInteger(vo.prod_price, 0, 'COMMA')} + '원'"></p>
-            </div>
-            <div class="price_amount_right">
-              <p>수량 : </p>
-              <select class="prod_count" name="amount" id="amount">
-                <option th:each="stock : ${#numbers.sequence(1, vo.prod_stock)}" th:value="${stock}" th:text="${stock}"></option>
-              </select>
-            </div>
-          </div>
-
-          <p class="post_price">배송비 : 3,000원</p>
-          <div class="buy_btn_box">
-            <button class="like_btn"><i class="glyphicon glyphicon glyphicon-heart-empty"></i></button>
-            <button class="buy_btn"><i class="glyphicon glyphicon-hand-right"></i> 구매하기</button>
-            <button class="cart_btn" onclick="cartHandle()"><i class="glyphicon glyphicon-shopping-cart"></i> 장바구니</button>
-          </div>
-          <div class="product_info">
-            <p class="in_stock">· In Stock</p>
-            <hr/>
-            <h4>상품정보</h4>
-            <div class="product_content_read">
-              <p>
-                [[${vo.prod_content}]]
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-
 
 
 </th:block>
@@ -78,21 +81,33 @@
 </html>
 
 <script>
-  const cartHandle = () => {
-    let amount = document.getElementById("amount").value;
-    let num = `[[${vo.prod_num}]]`;
-    fetch("/prod/addCart?num=" + num + "&amount=" + amount)
+    const cartHandle = () => {
+        let amount = document.getElementById("amount").value;
+        let num = `[[${vo.prod_num}]]`;
+        console.log(username);
+        fetch("/cart/addCart", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: token,
+            },
+            body: JSON.stringify({
+                num: num,
+                amount: amount,
+                username: username,
+            })
+        })
             .then(response => {
-              if (!response.ok) {
-                throw new Error('Network response was not ok');
-              }
-              return response.text(); // 또는 response.json() 사용 가능
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text(); // 또는 response.json() 사용 가능
             })
             .then(data => {
-              alert(data)
+                alert(data)
             })
             .catch(error => {
-              console.error(error);
+                console.error(error);
             });
-  }
+    }
 </script>
