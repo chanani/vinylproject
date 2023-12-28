@@ -17,5 +17,5 @@ public class UserVO {
     private String user_email;
     private String user_add;
     private String user_birth;
-
+    private String role;
 }

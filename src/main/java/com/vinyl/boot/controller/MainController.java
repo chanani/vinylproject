@@ -51,11 +51,10 @@ public class MainController {
     }
 
     @RequestMapping("/cartPage")
-    public String cartPage(/*@RequestParam("username") String username,*/
+    public String cartPage(@RequestParam("username") String username,
                            Model model,
                            RedirectAttributes ra){
 
-        String username = (String) httpSession.getAttribute(SESSION_COOKIE_NAME);
         if (username == null){
             String msg = "로그인을 해주세요.";
             ra.addFlashAttribute("msg", msg);

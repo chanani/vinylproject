@@ -11,13 +11,15 @@
                           user_phone,
                           user_email,
                           user_add,
-                          user_birth)
+                          user_birth,
+                          role)
         values(#{username},
                #{password},
                #{user_phone},
                #{user_email},
                #{user_add},
-               #{user_birth})
+               #{user_birth},
+               'user')
     </insert>
 
     <select id="checkId" resultType="String">
@@ -25,8 +27,15 @@
         from user
         where username = #{username}
     </select>
-    <select id="login" resultType="String">
-        select password From user
+    <select id="login" resultType="UserVO">
+        select username,
+               password,
+               user_phone,
+               user_email,
+               user_add,
+               user_birth,
+               role
+        From user
         where username = #{username}
     </select>
 </mapper>

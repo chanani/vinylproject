@@ -2,31 +2,25 @@ package com.vinyl.boot.controller;
 
 import com.vinyl.boot.command.UserVO;
 import com.vinyl.boot.command.ValidVO;
-import com.vinyl.boot.user.service.UserMapper;
 import com.vinyl.boot.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.web.servlet.server.Session;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
+
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/")
 public class UserController {
 
     @Autowired
@@ -34,7 +28,7 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private HttpSession httpSession;
+    private BCryptPasswordEncoder passwordEncoder;
     public static final String SESSION_COOKIE_NAME = "username";
     @PostMapping("/login")
     public String login(UserVO vo,
@@ -46,25 +40,13 @@ public class UserController {
             return "redirect:/";
         }
 
-        String password = userService.login(vo.getUsername());
-
-        if (vo.getPassword().equals(password)){
-            httpSession.setAttribute(SESSION_COOKIE_NAME, vo.getUsername());
-            String msg = vo.getUsername() + "님! 환영합니다^_^";
-            ra.addFlashAttribute("msg", msg);
-            String username = (String) httpSession.getAttribute("username");
-            ra.addFlashAttribute("session_username", username);
-            return "redirect:/";
-        } else {
-            String msg = "비밀번호를 확인해주세요.";
-            ra.addFlashAttribute("msg", msg);
-            return "redirect:/";
-        }
+        UserVO vo2 = userService.login(vo.getUsername());
+        System.out.println(vo2.toString());
+       return "g";
     }
 
     @RequestMapping("/logout")
     public String logout(){
-        httpSession.removeAttribute("username");
         return "redirect:/";
     }
 
@@ -108,16 +90,19 @@ public class UserController {
 
             return "/main/joinPage"; // 실패시 원래 화면으로
         }
-        if (vo.getPassword() != password2){
+
+        if (!vo.getPassword().equals(password2)){
             model.addAttribute("valid_password2", "비밀번호가 일치하지 않습니다.");
             return "/main/joinPage";
         }
+
+        String encryptedPassword = passwordEncoder.encode(vo.getPassword());
 
         String email = vo.getUser_email() + "@" + email_domain;
         String birth = year + "/" + month + "/" + day;
         String address = vo.getUser_add() + " " + address2;
         userVO.setUsername(vo.getUsername());
-        userVO.setPassword(vo.getPassword());
+        userVO.setPassword(encryptedPassword);
         userVO.setUser_phone(vo.getUser_phone());
         userVO.setUser_birth(birth);
         userVO.setUser_add(address);
@@ -129,10 +114,6 @@ public class UserController {
         return "redirect:/";
     }
 
-    @RequestMapping("/test")
-    public void test (){
-        String username = (String) httpSession.getAttribute(SESSION_COOKIE_NAME);
-        System.out.println("username test : " + username);
-    }
+
 
 }

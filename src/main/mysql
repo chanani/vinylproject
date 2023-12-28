@@ -1,12 +1,13 @@
 CREATE TABLE `user` (
 	`user_id`	varchar(20)	NOT NULL,
-	`user_pw`	varchar(20)	NOT NULL,
+	`user_pw`	varchar(50)	NOT NULL,
 	`user_name`	varchar(20)	NOT NULL,
 	`user_phone`	varchar(30)	NOT NULL,
 	`user_email`	varchar(40)	NOT NULL,
 	`user_add`	varchar(50)	NOT NULL,
 	`user_count`	int	NULL,
-	`user_insertdate`	timestamp default now() NOT NULL
+	`user_insertdate`	timestamp default now() NOT NULL,
+    `role` varchar(40) NOT NULL
 );
 
 CREATE TABLE `prod` (
@@ -98,4 +99,7 @@ ALTER TABLE `order_detail` ADD CONSTRAINT `PK_ORDER_DETAIL` PRIMARY KEY (
 ALTER TABLE `ask` ADD CONSTRAINT `PK_ASK` PRIMARY KEY (
 	`ask_num`
 );
+
+ALTER TABLE cart
+ADD CONSTRAINT uc_username_prod_num UNIQUE (username, prod_num);
 

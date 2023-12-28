@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String login(String username) {
+    public UserVO login(String username) {
         return userMapper.login(username);
     }
 }

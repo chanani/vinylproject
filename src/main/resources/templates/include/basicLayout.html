@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         <!-- 부트스트랩css -->
-        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 
         <!-- JQuery -->
         <script th:src="@{/js/jquery.js}"></script>
@@ -37,9 +37,10 @@
                 </nav>
                 <a th:href="@{/}" class="logo">oh, Universe</a>
                 <div class="icon_right">
-                    <a href="javascript:void(0);" onclick="openModal()"><i id="userIcon" class="glyphicon glyphicon-user"></i></a>
+                    <a href="javascript:void(0);" onclick="openModal()"><i id="userIcon"
+                                                                           class="glyphicon glyphicon-user"></i></a>
                     <a href="#"><i class="glyphicon glyphicon-heart"></i></a>
-                    <a th:href="@{/cartPage}" ><i class="glyphicon glyphicon-shopping-cart"></i></a>
+                    <a th:href="@{/cartPage}"><i class="glyphicon glyphicon-shopping-cart"></i></a>
                 </div>
                 <div class="search">
                     <form th:action="@{/prod/prodList}">
@@ -59,16 +60,16 @@
                     <span class="close" onclick="closeModal()">&times;</span>
                 </div>
                 <div class="login_box">
-                    <form action="/user/login" method="post">
+                    <form action="#" method="post">
 
                         <div class="login_write">
                             <p>ID</p>
-                            <div class="login_write_id" >
-                                <input type="text" placeholder="아이디를 입력하세요." name="username">
+                            <div class="login_write_id">
+                                <input type="text" placeholder="아이디를 입력하세요." name="username" class="username">
                             </div>
                             <p>PASSWORD</p>
                             <div class="login_write_pw">
-                                <input type="password" placeholder="비밀번호를 입력하세요." name="password">
+                                <input type="password" placeholder="비밀번호를 입력하세요." name="password" class="password">
                             </div>
                         </div>
                         <div class="login_row_box">
@@ -80,7 +81,7 @@
                             <p>아이디저장</p>
                         </div>
                         <div class="login_btn_box">
-                            <input type="submit" value="Login" class="login_btn">
+                            <input type="button" value="Login" class="login_btn" onclick="login()">
                         </div>
 
                     </form>
@@ -124,8 +125,6 @@
     </header>
 
 
-
-
     <main th:replace="${content}"></main>
 
 
@@ -144,11 +143,13 @@
                     </ul>
                     <ul class="content_list">
                         <h5>Contact</h5>
-                        <li>연락처 : </li>
+                        <li>연락처 :</li>
                         <li>02-999-9999</li>
-                        <li>이메일 : </li>
+                        <li>이메일 :</li>
                         <li>theholidaynight@gmail.com</li>
-                        <li>인스타 : <a href="https://www.instagram.com/c.ha_n/">c.ha_n<img th:src="@{/img/instaicon.png}" alt="" style="height: 20px;"></a></li>
+                        <li>인스타 : <a href="https://www.instagram.com/c.ha_n/">c.ha_n<img th:src="@{/img/instaicon.png}"
+                                                                                         alt=""
+                                                                                         style="height: 20px;"></a></li>
                     </ul>
                 </div>
                 <div class="ft_banner">
@@ -166,33 +167,69 @@
     </footer>
 
 
-
     </body>
 
     <script th:inline="javascript">
-
-        let username = [[${session_username}]];
-
         let msg = '[[${msg}]]';
-        console.log(username);
-        if (msg !== 'null'){
+        if (msg !== 'null') {
             alert(msg);
         }
 
     </script>
 
     <script>
-        if (username !== null) {
-            var userIcon = document.getElementById("userIcon");
-            userIcon.style.color = "#eab451";
+        // 로그인
+        function login() {
+            const formData = new FormData();
+            let username = document.querySelector(".username").value;
+            let password = document.querySelector(".password").value;
+            formData.append("username", username);
+            formData.append("password", password);
+            try{
+                fetch('/login', {
+                    method: 'POST',
+                    body: formData,
+                })
+                    .then((response) => {
+                        if (response.status !== 200){
+                            alert('아이디 또는 비밀번호를 확인해주세요.');
+                            throw new Error('아이디와 비밀번호를 확인해주세요.'); // 에러 발생
+                        }
+                        return response.json()
+                    })
+                    .then((data) => {
+                        const username = data.username;
+                        localStorage.setItem('username', username);
+                        console.log(username);
+                        const token = data.token; // 암호화된 토큰
+                        let payload = token.substring( // 진짜 토큰 가져오기
+                            token.indexOf('.') + 1,
+                            token.lastIndexOf('.')
+                        );
+                        localStorage.setItem('token', token);
+                        let json_data = atob(payload);
+                        let dec = JSON.parse(json_data);
+                        let role = dec.role;
+                        alert("반갑습니다.")
+                        window.location = "/";
+                    })
+                    .catch(Error => console.log('Error : ', Error));
+            } catch(error) {
+                alert('아이디 또는 비밀번호를 확인해주세요.');
+                console.error('로그인 요청 중 오류 발생:', error);
+            }
+
         }
 
-        var userIcon = document.getElementById("userIcon");
+        let username = localStorage.getItem("username");
+        let userIcon = document.getElementById("userIcon");
         userIcon.addEventListener('click', function () {
             if (username !== null) {
                 // 로그아웃 확인 창 띄우기
                 if (confirm("로그아웃 하시겠습니까?")) {
-                    window.location.href = "/user/logout";
+                    localStorage.removeItem("username");
+                    localStorage.removeItem("token");
+                    window.location.href = "/logout";
                 }
             } else {
                 openModal();

@@ -9,7 +9,7 @@
   <div class="container wrap">
     <div class="row">
 
-      <form action="/user/joinForm" name="frmJoin" class="frmJoin" method="post">
+      <form action="/joinForm" name="frmJoin" class="frmJoin" method="post">
         <h2 class="title">회원가입</h2>
         <div class="username_box">
           <input type="text" class="username" placeholder="아이디 입력(6~15자)" name="username" id="username" th:value="${vo != null ? vo.username : '' }">
@@ -73,7 +73,7 @@
   function overLap(e){ // 아이디 중복 여부 함수
     event.preventDefault();
     let username = document.getElementById("username").value;
-    fetch("/user/checkId?username=" + username)
+    fetch("/checkId?username=" + username)
             .then(response => {
               if (!response.ok) {
                 throw new Error('Network response was not ok');
