@@ -6,62 +6,62 @@
 
 <th:block th:replace="~{include/basicLayout :: setContent(~{::.wrap})}">
 
-  <div class="container wrap">
-    <div class="row">
+    <div class="container wrap">
+        <div class="row">
 
-      <div class="pageHead">
-        <h3>Your Cart</h3>
-        <p th:text="${cart_count} + '개 / ' + ${#numbers.formatInteger(price_sum, 0, 'COMMA')} + '원'"></p>
-        <hr/>
-      </div>
-
-
-      <div class="cart_box" th:each="vo, prodIndex : ${list}">
-        <div class="cartImg">
-          <a th:each="image, imageIndex : ${imgList}" th:if="${imageIndex.index == prodIndex.index}"
-             th:href="@{/prod/prodDetail(prod_num=${vo.prod_num})}" name="vinyl">
-            <img th:src="@{'/uploadImg/' + ${image.img_path} + '/' + ${image.img_uuid} + '_' + ${image.img_name}}"
-                 alt="" th:alt="${image.img_name}">
-          </a>
-        </div>
-        <div class="cartInfo">
-          <h3 class="prod_name">[[${vo.prod_name}]]</h3>
-          <p class="prod_singer">[[${vo.prod_singer}]]</p>
-          <p class="prod_num" id="prod_num">ItemNumber : [[${vo.prod_num}]]</p>
-          <p class="prod_text">Vinyl LP</p>
-        </div>
-
-        <div class="cartPrice">
-          <h4 class="prod_price" th:text="${#numbers.formatInteger(vo.prod_price, 0, 'COMMA')} + '원'" > </h4>
-          <div class="prod_count">
-            <p>수량 : [[${vo.prod_count}]]</p>
-          </div>
-        </div>
-
-        <div class="delete_btn_box">
-          <button class="delete_btn" th:attr="data-prod-num=${vo.prod_num}" onclick="deleteHandle(this)">X</button>
-        </div>
-      </div>
-
-      <hr/>
-
-      <div class="result_box">
-        <div class="result_price">
-          <h4 th:text="'총 결제 금액 : ' + ${#numbers.formatInteger(price_sum, 0, 'COMMA')} + '원'" > </h4>
-        </div>
-
-        <div class="result_btn">
-            <button class="btn">결제하기</button>
-            <div class="btn-particles">
+            <div class="pageHead">
+                <h3>Your Cart</h3>
+                <p th:text="${cart_count} + '개 / ' + ${#numbers.formatInteger(price_sum, 0, 'COMMA')} + '원'"></p>
+                <hr/>
             </div>
+
+
+            <div class="cart_box" th:each="vo, prodIndex : ${list}">
+                <div class="cartImg">
+                    <a th:each="image, imageIndex : ${imgList}" th:if="${imageIndex.index == prodIndex.index}"
+                       th:href="@{/prod/prodDetail(prod_num=${vo.prod_num})}" name="vinyl">
+                        <img th:src="@{'/uploadImg/' + ${image.img_path} + '/' + ${image.img_uuid} + '_' + ${image.img_name}}"
+                             alt="" th:alt="${image.img_name}">
+                    </a>
+                </div>
+                <div class="cartInfo">
+                    <h3 class="prod_name">[[${vo.prod_name}]]</h3>
+                    <p class="prod_singer">[[${vo.prod_singer}]]</p>
+                    <p class="prod_num" id="prod_num">ItemNumber : [[${vo.prod_num}]]</p>
+                    <p class="prod_text">Vinyl LP</p>
+                </div>
+
+                <div class="cartPrice">
+                    <h4 class="prod_price" th:text="${#numbers.formatInteger(vo.prod_price, 0, 'COMMA')} + '원'"></h4>
+                    <div class="prod_count">
+                        <p>수량 : [[${vo.prod_count}]]</p>
+                    </div>
+                </div>
+
+                <div class="delete_btn_box">
+                    <button class="delete_btn" th:attr="data-prod-num=${vo.prod_num}" onclick="deleteHandle(this)">X
+                    </button>
+                </div>
+            </div>
+
+            <hr/>
+
+            <div class="result_box">
+                <div class="result_price">
+                    <h4 th:text="'총 결제 금액 : ' + ${#numbers.formatInteger(price_sum, 0, 'COMMA')} + '원'"></h4>
+                </div>
+
+                <div class="result_btn">
+                    <button class="btn">결제하기</button>
+                    <div class="btn-particles">
+                    </div>
+                </div>
+
+            </div>
+
+
         </div>
-
-      </div>
-
-
     </div>
-  </div>
-
 
 
 </th:block>
@@ -70,102 +70,105 @@
 </html>
 
 <script>
-  $.fn.boom = function(e) {
-    var colors = [
-      '#ffb3f6',
-      '#7aa0ff',
-      '#333',
-      // '#FFD100',
-      // '#FF9300',
-      // '#FF7FA4'
-    ];
-    var shapes = [
-      '<polygon class="star" points="21,0,28.053423027509677,11.29179606750063,40.97218684219823,14.510643118126104,32.412678195541844,24.70820393249937,33.34349029814194,37.989356881873896,21,33,8.656509701858067,37.989356881873896,9.587321804458158,24.70820393249937,1.0278131578017735,14.510643118126108,13.94657697249032,11.291796067500632"></polygon>',
-      // '<path class="circle" d="m 20 1 a 1 1 0 0 0 0 25 a 1 1 0 0 0 0 -25"></path>',
-      '<polygon class="other-star" points="18,0,22.242640687119284,13.757359312880714,36,18,22.242640687119284,22.242640687119284,18.000000000000004,36,13.757359312880716,22.242640687119284,0,18.000000000000004,13.757359312880714,13.757359312880716"></polygon>',
-      '<polygon class="diamond" points="18,0,27.192388155425117,8.80761184457488,36,18,27.19238815542512,27.192388155425117,18.000000000000004,36,8.807611844574883,27.19238815542512,0,18.000000000000004,8.80761184457488,8.807611844574884"></polygon>'
-    ];
+    $.fn.boom = function (e) {
+        var colors = [
+            '#ffb3f6',
+            '#7aa0ff',
+            '#333',
+            // '#FFD100',
+            // '#FF9300',
+            // '#FF7FA4'
+        ];
+        var shapes = [
+            '<polygon class="star" points="21,0,28.053423027509677,11.29179606750063,40.97218684219823,14.510643118126104,32.412678195541844,24.70820393249937,33.34349029814194,37.989356881873896,21,33,8.656509701858067,37.989356881873896,9.587321804458158,24.70820393249937,1.0278131578017735,14.510643118126108,13.94657697249032,11.291796067500632"></polygon>',
+            // '<path class="circle" d="m 20 1 a 1 1 0 0 0 0 25 a 1 1 0 0 0 0 -25"></path>',
+            '<polygon class="other-star" points="18,0,22.242640687119284,13.757359312880714,36,18,22.242640687119284,22.242640687119284,18.000000000000004,36,13.757359312880716,22.242640687119284,0,18.000000000000004,13.757359312880714,13.757359312880716"></polygon>',
+            '<polygon class="diamond" points="18,0,27.192388155425117,8.80761184457488,36,18,27.19238815542512,27.192388155425117,18.000000000000004,36,8.807611844574883,27.19238815542512,0,18.000000000000004,8.80761184457488,8.807611844574884"></polygon>'
+        ];
 
-    var btn = $(this);
-    var group = [];
-    var num = Math.floor(Math.random() * 50) + 30;
+        var btn = $(this);
+        var group = [];
+        var num = Math.floor(Math.random() * 50) + 30;
 
-    for(i = 0; i < num; i++) {
-      var randBG = Math.floor(Math.random() * colors.length);
-      var getShape = Math.floor(Math.random() * shapes.length);
-      var c = Math.floor(Math.random() * 10) + 5;
-      var scale = Math.floor(Math.random() * (8 - 4 + 1)) + 4;
-      var x = Math.floor(Math.random() * (150 + 100)) - 100;
-      var y = Math.floor(Math.random() * (150 + 100)) - 100;
-      var sec = Math.floor(Math.random() * 1700) + 1000;
-      var cir = $('<div class="cir"></div>');
-      var shape = $('<svg class="shape">'+shapes[getShape]+'</svg>');
+        for (i = 0; i < num; i++) {
+            var randBG = Math.floor(Math.random() * colors.length);
+            var getShape = Math.floor(Math.random() * shapes.length);
+            var c = Math.floor(Math.random() * 10) + 5;
+            var scale = Math.floor(Math.random() * (8 - 4 + 1)) + 4;
+            var x = Math.floor(Math.random() * (150 + 100)) - 100;
+            var y = Math.floor(Math.random() * (150 + 100)) - 100;
+            var sec = Math.floor(Math.random() * 1700) + 1000;
+            var cir = $('<div class="cir"></div>');
+            var shape = $('<svg class="shape">' + shapes[getShape] + '</svg>');
 
-      shape.css({
-        top: e.pageY - btn.offset().top + 20,
-        left: e.pageX - btn.offset().left + 40,
-        'transform': 'scale(0.'+scale+')',
-        'transition': sec + 'ms',
-        'fill': colors[randBG]
-      });
+            shape.css({
+                top: e.pageY - btn.offset().top + 20,
+                left: e.pageX - btn.offset().left + 40,
+                'transform': 'scale(0.' + scale + ')',
+                'transition': sec + 'ms',
+                'fill': colors[randBG]
+            });
 
-      btn.siblings('.btn-particles').append(shape);
+            btn.siblings('.btn-particles').append(shape);
 
-      group.push({shape: shape, x: x, y: y});
+            group.push({shape: shape, x: x, y: y});
+        }
+
+        for (var a = 0; a < group.length; a++) {
+            var shape = group[a].shape;
+            var x = group[a].x, y = group[a].y;
+            shape.css({
+                left: x + 50,
+                top: y + 15,
+                'transform': 'scale(0)'
+            });
+        }
+
+        setTimeout(function () {
+            for (var b = 0; b < group.length; b++) {
+                var shape = group[b].shape;
+                shape.remove();
+            }
+            group = [];
+        }, 2000);
+
     }
 
-    for (var a = 0; a < group.length; a++) {
-      var shape = group[a].shape;
-      var x = group[a].x, y = group[a].y;
-      shape.css({
-        left: x + 50,
-        top: y + 15,
-        'transform': 'scale(0)'
-      });
-    }
+    $(function () {
+        $(document).on('click', '.btn', function (e) {
+            $(this).boom(e);
+        });
 
-    setTimeout(function() {
-      for (var b = 0; b < group.length; b++) {
-        var shape = group[b].shape;
-        shape.remove();
-      }
-      group = [];
-    }, 2000);
-
-  }
-
-  $(function() {
-    $(document).on('click', '.btn', function(e) {
-      $(this).boom(e);
     });
 
-  });
-
-  // delete 버튼
-  const deleteHandle = (e) => {
-    let prod_num = e.getAttribute("data-prod-num");
-    fetch("/cart/delete", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: `prod_num=${prod_num}&username=${username}`
-    })
+    // delete 버튼
+    const deleteHandle = (e) => {
+        let prod_num = e.getAttribute("data-prod-num");
+        fetch("/cart/delete", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: token,
+            },
+            body: JSON.stringify({
+                prod_num: prod_num,
+                username: username,
+            })
+        })
             .then(response => {
-              if (!response.ok) {
-                throw new Error('Network response was not ok');
-              }
-              return response.text(); // 또는 response.json() 사용 가능
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text(); // 또는 response.json() 사용 가능
             })
             .then(data => {
-              alert(data);
-              window.location.reload();
-
+                alert(data);
+                window.location.reload();
             })
             .catch(error => {
-              console.error(error);
+                console.error(error);
             });
-  }
+    }
 
 </script>
 

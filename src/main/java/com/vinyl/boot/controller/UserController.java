@@ -114,6 +114,11 @@ public class UserController {
         return "redirect:/";
     }
 
+    @RequestMapping("/findPassword")
+    public String findPassword(){
+
+        return "/main/findPassword";
+    }
 
 
 }

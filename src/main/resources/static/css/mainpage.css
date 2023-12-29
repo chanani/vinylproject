@@ -261,5 +261,31 @@ footer .ft_banner .banner_right > li{float: left; padding-left: 15px; }
   .login_box .login_join {float:right; padding-top: 10px; }
   .login_box .login_join > a {color: #a7a6a6;}
 
+  .find_modal{
+      display: none;
+      z-index: 10000;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      -webkit-overflow-scrolling: touch;
+      outline: 0;
+  }
 
+.find_popup_top {overflow: hidden; background-color: #e7e5e5; height: 60px; padding: 15px 20px;}
+.find_popup_top > p {float: left; font-size: 18px; margin: 0; line-height: 31px;}
+.find_popup_top > .clos {float: right;}
+.find_box {padding: 20px 40px;}
+.find_box .find_write{padding-bottom: 10px;}
+.find_box .find_write > p {margin: 0; color: #9d9d9d;}
+.find_box .find_write .find_write_id, .find_write_email {width:500px; height: 45px; margin-bottom: 12px; padding:11px 0 10px; border-bottom: 2px solid #d6d6d6}
+.find_box .find_write .find_write_id > input,
+.find_box .find_write .find_write_email > input {width: 500px; height: 27px; background-color: rgb(239, 240, 248); border: none; }
 
+.find_box .find_btn_box .find_btn {width: 500px; height: 50px; background-color: rgb(126, 126, 126); border: none; font-size: 18px; border-radius: 5px; color: white;}
+.find_box .find_btn_box .find_btn_box {padding-top: 10px;}
