@@ -23,4 +23,9 @@ public class UserServiceImpl implements UserService {
     public UserVO login(String username) {
         return userMapper.login(username);
     }
+
+    @Override
+    public int checkEmail(String username, String email) {
+        return userMapper.checkEmail(username, email);
+    }
 }

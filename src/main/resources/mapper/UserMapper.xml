@@ -38,4 +38,11 @@
         From user
         where username = #{username}
     </select>
+
+    <select id="checkEmail" resultType="int">
+        SELECT IF(COUNT(username) = 1, 1, 0) as result
+        from user
+        where username = #{username} and
+              user_email = #{email};
+    </select>
 </mapper>

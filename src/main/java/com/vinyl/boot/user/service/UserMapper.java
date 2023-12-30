@@ -8,6 +8,7 @@ public interface UserMapper {
     public int addJoin(UserVO vo);
     public String checkId(String username);
     public UserVO login(String username);
+    public int checkEmail(String username, String email);
 
 
 }

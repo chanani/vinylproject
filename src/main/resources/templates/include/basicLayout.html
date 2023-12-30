@@ -96,7 +96,7 @@
 
         <!-- find password modal -->
         <div id="find" class="find_modal">
-            <div class="modal_content">
+            <div class="find_modal_content">
                 <div class="find_popup_top">
                     <p>비밀번호 찾기</p>
                     <span class="close" onclick="findCloseModal()">&times;</span>
@@ -107,11 +107,11 @@
                         <div class="find_write">
                             <p>ID</p>
                             <div class="find_write_id">
-                                <input type="text" placeholder="아이디를 입력하세요." name="username" class="username">
+                                <input type="text" placeholder="아이디를 입력하세요." name="username1" class="username">
                             </div>
                             <p>PASSWORD</p>
                             <div class="find_write_email">
-                                <input type="email" placeholder="이메일을 입력하세요." name="email" class="email">
+                                <input type="email" placeholder="이메일을 입력하세요." name="email1" class="email">
                             </div>
                         </div>
 
@@ -283,6 +283,7 @@
 
         // 비밀번호 찾기 모달 창 열기
         function findOpenModal() {
+            closeModal();
             if (username === null) {
                 const findModal = document.getElementById('find');
                 findModal.style.display = 'block';
@@ -301,54 +302,102 @@
             find_btn_box.removeChild(time_box_div);
         }
 
+        let authNumber = null;
+
         function authBtn() {
-            let find_btn = document.querySelector(".find_btn");
-            find_btn.disabled = true;
-            find_btn.style.backgroundColor = "#aeaeae";
-            let find_btn_box = document.querySelector(".find_btn_box");
-            let find_div = document.createElement("div");
-            let auth_input = document.createElement("input");
-            let time_box_div = document.createElement("div");
-            let time_div = document.createElement("div");
-            let time_btn_div = document.createElement("div");
-            let min_span = document.createElement("span");
-            let sec_span = document.createElement("span");
-            let auth_btn = document.createElement("button");
-            auth_input.classList.add("auth_input");
-            auth_input.placeholder = "인증번호를 입력해주세요.";
-            time_box_div.classList.add("time_box_div");
-            find_div.classList.add("find_div");
-            time_div.classList.add("time_div");
-            time_btn_div.classList.add("time_btn_div");
-            auth_btn.classList.add("auth_btn");
-            auth_btn.innerText = "인증확인";
-            time_div.appendChild(min_span);
-            time_div.appendChild(sec_span);
-            time_btn_div.appendChild(auth_btn);
-            time_box_div.appendChild(time_div);
-            time_box_div.appendChild(time_btn_div);
+            let find_write_id = document.querySelector(".find_write_id > input");
+            let find_write_email = document.querySelector(".find_write_email > input");
+            fetch("/checkEmail", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                },
+                body: JSON.stringify({
+                    username: find_write_id.value,
+                    email: find_write_email.value
+                })
+            })
+                .then((response) => response.text())
+                .then((data) => {
+                    if (data === '0') alert("아이디와 이메일을 확인해주세요.");
+                    else {
+                        let find_btn = document.querySelector(".find_btn");
+                        find_btn.disabled = true;
+                        find_btn.style.backgroundColor = "#aeaeae";
+                        let find_btn_box = document.querySelector(".find_btn_box");
+                        let find_div = document.createElement("div");
+                        let auth_input = document.createElement("input");
+                        let time_box_div = document.createElement("div");
+                        let time_div = document.createElement("div");
+                        let time_btn_div = document.createElement("div");
+                        let min_span = document.createElement("span");
+                        let sec_span = document.createElement("span");
+                        let auth_btn = document.createElement("input");
+                        auth_input.classList.add("auth_input");
+                        auth_input.placeholder = "인증번호를 입력해주세요.";
+                        time_box_div.classList.add("time_box_div");
+                        find_div.classList.add("find_div");
+                        time_div.classList.add("time_div");
+                        time_btn_div.classList.add("time_btn_div");
+                        auth_btn.type = "button"
+                        auth_btn.onclick = authResult;
+                        auth_btn.classList.add("auth_btn");
+                        auth_btn.value = "인증확인";
+                        time_div.appendChild(min_span);
+                        time_div.appendChild(sec_span);
+                        time_btn_div.appendChild(auth_btn);
+                        time_box_div.appendChild(time_div);
+                        time_box_div.appendChild(time_btn_div);
 
-            find_div.appendChild(auth_input);
-            find_btn_box.appendChild(find_div);
-            find_btn_box.appendChild(time_box_div);
+                        find_div.appendChild(auth_input);
+                        find_btn_box.appendChild(find_div);
+                        find_btn_box.appendChild(time_box_div);
 
-            let time = 180;
-            setInterval(function () {
-                if (time > 0) {
-                    time = time - 1;
-                    let min = Math.floor(time / 60);
-                    let sec = String(time % 60).padStart(2, "0");
-                    min_span.innerText = min + " : ";
-                    sec_span.innerText = sec;
-                } else {
-                    auth_btn.disabled = true;
-                    auth_btn.style.backgroundColor = "#ff5555";
-                }
-            }, 1000);
+                        let time = 180;
+                        setInterval(function () {
+                            if (time > 0) {
+                                time = time - 1;
+                                let min = Math.floor(time / 60);
+                                let sec = String(time % 60).padStart(2, "0");
+                                min_span.innerText = min + " : ";
+                                sec_span.innerText = sec;
+                            } else {
+                                auth_btn.disabled = true;
+                                auth_btn.style.backgroundColor = "#ff5555";
+                            }
+                        }, 1000);
 
 
+                        fetch('/authNumber', {
+                            method: "POST",
+                            headers: {
+                                'Content-Type': 'application/json; charset=utf-8'
+                            },
+                            body: JSON.stringify({
+                                username: find_write_id.value,
+                                email: find_write_email.value
+                            })
+                        })
+                            .then((response) => response.text())
+                            .then((data) => {
+                                authNumber = data;
+                                console.log(data);
+                            })
+                            .catch(e => console.log("Error : ", e))
+                    }
+                })
+                .catch(e => console.log("Error :" + e));
         }
 
+        function authResult (){
+            let auth_input = document.querySelector(".auth_input").value;
+            if (auth_input === authNumber){
+                console.log("인증완료 !");
+            } else {
+                alert("인증번호가 일치하지 않습니다.")
+            }
+
+        }
 
     </script>
 

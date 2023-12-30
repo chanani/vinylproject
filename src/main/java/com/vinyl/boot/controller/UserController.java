@@ -3,8 +3,11 @@ package com.vinyl.boot.controller;
 import com.vinyl.boot.command.UserVO;
 import com.vinyl.boot.command.ValidVO;
 import com.vinyl.boot.user.service.UserService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +20,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 
 @Controller
@@ -29,8 +34,7 @@ public class UserController {
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
-    public static final String SESSION_COOKIE_NAME = "username";
-    @PostMapping("/login")
+    /*@PostMapping("/login")
     public String login(UserVO vo,
                         RedirectAttributes ra,
                         HttpServletResponse response){
@@ -43,10 +47,10 @@ public class UserController {
         UserVO vo2 = userService.login(vo.getUsername());
         System.out.println(vo2.toString());
        return "g";
-    }
+    }*/
 
     @RequestMapping("/logout")
-    public String logout(){
+    public String logout() {
         return "redirect:/";
     }
 
@@ -60,7 +64,7 @@ public class UserController {
                            @RequestParam("password2") String password2,
                            UserVO userVO,
                            RedirectAttributes ra,
-                           Model model){
+                           Model model) {
 
         model.addAttribute("year", year);
         model.addAttribute("month", month);
@@ -76,10 +80,10 @@ public class UserController {
 
             // 2. 반복처리
             for (FieldError err : list) {
-            System.out.println(err);
-            System.out.println(err.getField()); // 에러가 난 필드명
-            System.out.println(err.getDefaultMessage()); // 메시지 출력
-            System.out.println(err.isBindingFailure()); // 유효성검사에 의해서 err라면 false, 아니라면 true, 자바 내부에서 err
+                System.out.println(err);
+                System.out.println(err.getField()); // 에러가 난 필드명
+                System.out.println(err.getDefaultMessage()); // 메시지 출력
+                System.out.println(err.isBindingFailure()); // 유효성검사에 의해서 err라면 false, 아니라면 true, 자바 내부에서 err
 
                 if (err.isBindingFailure()) {
                     model.addAttribute("valid_" + err.getField(), "잘못된 값 입력입니다.");
@@ -91,7 +95,7 @@ public class UserController {
             return "/main/joinPage"; // 실패시 원래 화면으로
         }
 
-        if (!vo.getPassword().equals(password2)){
+        if (!vo.getPassword().equals(password2)) {
             model.addAttribute("valid_password2", "비밀번호가 일치하지 않습니다.");
             return "/main/joinPage";
         }
@@ -114,10 +118,35 @@ public class UserController {
         return "redirect:/";
     }
 
-    @RequestMapping("/findPassword")
-    public String findPassword(){
+    @PostMapping("/authNumber")
+    public ResponseEntity<String> authNumber(@RequestBody Map<String, Object> map) {
+        String username = (String) map.get("username");
+        String email = (String) map.get("email");
+        int result = (int) (Math.random() * 899999) + 100000;
 
-        return "/main/findPassword";
+        try {
+            return ResponseEntity.ok(String.valueOf(result));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("오류가 발생했습니다.");
+        }
+
+    }
+
+    @PostMapping("/checkEmail")
+    public ResponseEntity<String> checkEmail(@RequestBody Map<String, Object> map){
+        String username = (String) map.get("username");
+        String email = (String) map.get("email");
+
+        try {
+            // int result = userService.checkEmail(username, email);
+            int result = 1;
+            System.out.println("result : " + result);
+            return ResponseEntity.ok(String.valueOf(result));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("정보 확인 중 오류가 발생하였습니다.");
+        }
     }
 
 
