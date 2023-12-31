@@ -3,6 +3,7 @@ package com.vinyl.boot.controller;
 import com.vinyl.boot.command.UserVO;
 import com.vinyl.boot.command.ValidVO;
 import com.vinyl.boot.user.service.UserService;
+import com.vinyl.boot.util.MailSend;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -122,10 +123,13 @@ public class UserController {
     public ResponseEntity<String> authNumber(@RequestBody Map<String, Object> map) {
         String username = (String) map.get("username");
         String email = (String) map.get("email");
-        int result = (int) (Math.random() * 899999) + 100000;
-
+        MailSend send = new MailSend();
+        int number = (int) ((Math.random() * 899999) + 100000);
+        send.setAuthNum(number);
+        String result = send.welcomeMailSend(email, send.getAuthNum());
+        System.out.println(result);
         try {
-            return ResponseEntity.ok(String.valueOf(result));
+            return ResponseEntity.ok(String.valueOf(number));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("오류가 발생했습니다.");
@@ -138,10 +142,9 @@ public class UserController {
         String username = (String) map.get("username");
         String email = (String) map.get("email");
 
+
         try {
-            // int result = userService.checkEmail(username, email);
-            int result = 1;
-            System.out.println("result : " + result);
+            int result = userService.checkEmail(username, email);
             return ResponseEntity.ok(String.valueOf(result));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -149,5 +152,26 @@ public class UserController {
         }
     }
 
-
+    @PostMapping("/modifyPassword")
+    public ResponseEntity<String> modifyPassword(@RequestBody Map<String, Object> map){
+        String username = (String) map.get("username");
+        String password = (String) map.get("password");
+        String pw = passwordEncoder.encode(password);
+        try {
+            System.out.println("pw : " +pw);
+            System.out.println("username : " + username );
+            System.out.println("password : " + password);
+            int result = userService.modifyPassword(username, pw);
+            System.out.println("result : " + result);
+            if (result == 1){
+                return ResponseEntity.ok("정상적으로 비밀번호가 변경되었습니다.");
+            } else {
+                return ResponseEntity.ok("비밀번호 변경에 실패하였습니다.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("비밀번호 변경 중 오류가 발생하였습니다.");
+        }
+    }
 }

@@ -89,6 +89,10 @@
                     <div class="login_join">
                         <a th:href="@{/joinpage}">회원가입</a>
                     </div>
+
+                    <div class="social_login">
+                        <a href="#"><img src="../../static/img/kakao_login_medium_wide.png" alt="카카오계정 로그인"></a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -107,9 +111,9 @@
                         <div class="find_write">
                             <p>ID</p>
                             <div class="find_write_id">
-                                <input type="text" placeholder="아이디를 입력하세요." name="username1" class="username">
+                                <input type="text" placeholder="아이디를 입력하세요." name="username1" class="username" id="write_username">
                             </div>
-                            <p>PASSWORD</p>
+                            <p>EMAIL</p>
                             <div class="find_write_email">
                                 <input type="email" placeholder="이메일을 입력하세요." name="email1" class="email">
                             </div>
@@ -125,6 +129,37 @@
             </div>
         </div>
 
+
+        <!-- password modify modal -->
+        <div id="pwModify" class="modify_modal">
+            <div class="modify_modal_content">
+                <div class="modify_popup_top">
+                    <p>비밀번호 변경하기</p>
+                    <span class="close" onclick="modifyCloseModal()">&times;</span>
+                </div>
+                <div class="modify_box">
+                    <form action="#" method="post">
+
+                        <div class="modify_write">
+                            <p>PASSWORD</p>
+                            <div class="modify_password">
+                                <input type="password" placeholder="비밀번호를 입력하세요." name="password" class="modify_password_input">
+                            </div>
+                            <p>PASSWORD</p>
+                            <div class="modify_password2">
+                                <input type="password" placeholder="다시 비밀번호를 입력하세요." name="password2" class="modify_password2_input">
+                            </div>
+                        </div>
+
+                        <div class="modify_btn_box">
+                            <input type="button" value="비밀번호 변경하기" class="modify_btn" onclick="modifyBtn()">
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
 
         <div class="lower">
             <div class="inset">
@@ -279,6 +314,10 @@
 
         function closeModal() {
             document.getElementById('myModal').style.display = 'none';
+            let login_write_id = document.querySelector(".login_write_id > input");
+            let login_write_pw = document.querySelector(".login_write_pw > input");
+            login_write_id.value = "";
+            login_write_pw.value = "";
         }
 
         // 비밀번호 찾기 모달 창 열기
@@ -290,9 +329,26 @@
                 findModal.classList.add("z_index");
             }
         }
+        function modifyCloseModal() {
+            document.getElementById('pwModify').style.display = 'none';
+            let modify_password = document.querySelector(".modify_password > input");
+            let modify_password2 = document.querySelector(".modify_password2 > input");
+            modify_password.value = "";
+            modify_password2.value = "";
+        }
+
+        function modifyOpenModal() {
+            findCloseModal();
+            const pwModify = document.getElementById('pwModify');
+            pwModify.style.display = 'block';
+        }
 
         function findCloseModal() {
             document.getElementById('find').style.display = 'none';
+            let find_write_id = document.querySelector(".find_write_id > input");
+            let find_write_email = document.querySelector(".find_write_email > input");
+            find_write_id.value = "";
+            find_write_email.value = "";
             let find_btn_box = document.querySelector(".find_btn_box");
             let find_btn = document.querySelector(".find_btn");
             let find_div = document.querySelector(".find_div");
@@ -343,6 +399,7 @@
                         auth_btn.onclick = authResult;
                         auth_btn.classList.add("auth_btn");
                         auth_btn.value = "인증확인";
+
                         time_div.appendChild(min_span);
                         time_div.appendChild(sec_span);
                         time_btn_div.appendChild(auth_btn);
@@ -381,7 +438,6 @@
                             .then((response) => response.text())
                             .then((data) => {
                                 authNumber = data;
-                                console.log(data);
                             })
                             .catch(e => console.log("Error : ", e))
                     }
@@ -392,10 +448,38 @@
         function authResult (){
             let auth_input = document.querySelector(".auth_input").value;
             if (auth_input === authNumber){
-                console.log("인증완료 !");
+                modifyOpenModal();
             } else {
                 alert("인증번호가 일치하지 않습니다.")
             }
+
+        }
+
+        function modifyBtn(){
+            let write_username = document.querySelector("#write_username").value; // username
+            let password = document.querySelector(".modify_password_input").value;
+            let password2 = document.querySelector(".modify_password2_input").value;
+            if (password === password2){
+                fetch("/modifyPassword", {
+                    method : "POST",
+                    headers : {
+                        'Content-Type': 'application/json; charset=utf-8'
+                    },
+                    body : JSON.stringify({
+                        username : write_username,
+                        password : password
+                    })
+                })
+                    .then((response) => response.text())
+                    .then((data) => {
+                        alert(data);
+                        modifyCloseModal();
+                        openModal();
+                    })
+            } else {
+                alert("비밀번호가 일치하지 않습니다.");
+            }
+
 
         }
 

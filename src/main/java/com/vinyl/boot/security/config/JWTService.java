@@ -12,7 +12,7 @@ import java.util.Date;
 public class JWTService {
 
     @Value("${secretKey}")
-    private static String secretKey = "coding404";
+    private static String secretKey = "ohohuniverse";
 
     // 토큰생성
     public static String createToken(String username, String role){
