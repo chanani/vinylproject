@@ -89,9 +89,12 @@
                     <div class="login_join">
                         <a th:href="@{/joinpage}">회원가입</a>
                     </div>
-
+<!-- 1fbd8b26674ade104fbe5d283fca27cb -->
                     <div class="social_login">
-                        <a href="#"><img src="../../static/img/kakao_login_medium_wide.png" alt="카카오계정 로그인"></a>
+                        <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=1fbd8b26674ade104fbe5d283fca27cb&redirect_uri=http://localhost:8888/kakaoLogin
+&response_type=code">
+                            <img th:src="@{/img/kakao_login_medium_wide.png}" alt="카카오계정 로그인">
+                        </a>
                     </div>
                 </div>
             </div>
@@ -230,6 +233,12 @@
         if (msg !== 'null') {
             alert(msg);
         }
+        let access_Token = `[[${access_Token}]]`
+        let nickname = `[[${nickname}]]`
+        if (access_Token !== 'null'){
+            localStorage.setItem("token", access_Token);
+            localStorage.setItem("username", nickname);
+        }
 
     </script>
 
@@ -342,13 +351,8 @@
             const pwModify = document.getElementById('pwModify');
             pwModify.style.display = 'block';
         }
-
         function findCloseModal() {
             document.getElementById('find').style.display = 'none';
-            let find_write_id = document.querySelector(".find_write_id > input");
-            let find_write_email = document.querySelector(".find_write_email > input");
-            find_write_id.value = "";
-            find_write_email.value = "";
             let find_btn_box = document.querySelector(".find_btn_box");
             let find_btn = document.querySelector(".find_btn");
             let find_div = document.querySelector(".find_div");
@@ -360,9 +364,11 @@
 
         let authNumber = null;
 
+
         function authBtn() {
             let find_write_id = document.querySelector(".find_write_id > input");
             let find_write_email = document.querySelector(".find_write_email > input");
+
             fetch("/checkEmail", {
                 method: "POST",
                 headers: {

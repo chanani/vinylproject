@@ -47,6 +47,8 @@ dependencies {
     // email 보내기
     implementation 'javax.mail:mail:1.4.7'
 
+    // JSON
+    implementation 'com.google.code.gson:gson:2.8.6'
 }
 
 tasks.named('test') {

@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -158,11 +159,7 @@ public class UserController {
         String password = (String) map.get("password");
         String pw = passwordEncoder.encode(password);
         try {
-            System.out.println("pw : " +pw);
-            System.out.println("username : " + username );
-            System.out.println("password : " + password);
             int result = userService.modifyPassword(username, pw);
-            System.out.println("result : " + result);
             if (result == 1){
                 return ResponseEntity.ok("정상적으로 비밀번호가 변경되었습니다.");
             } else {
@@ -174,4 +171,18 @@ public class UserController {
                     .body("비밀번호 변경 중 오류가 발생하였습니다.");
         }
     }
+
+        @RequestMapping(value = "/kakaoLogin", method = RequestMethod.GET)
+        public String kakaoLogin (@RequestParam(value = "code", required = false) String code,
+                                  RedirectAttributes ra) throws Exception{
+            String access_Token = userService.getAccessToken(code);
+            HashMap<String, Object> userInfo = userService.getUserInfo(access_Token);
+            System.out.println("###access_Token#### : " + access_Token);
+            System.out.println("###nickname#### : " + userInfo.get("nickname"));
+            System.out.println("###email#### : " + userInfo.get("email"));
+            ra.addFlashAttribute("access_Token", access_Token);
+            ra.addFlashAttribute("nickname", userInfo.get("nickname"));
+            return "redirect:/";
+        }
+
 }
