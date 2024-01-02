@@ -3,19 +3,42 @@ package com.vinyl.boot.user.service;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.vinyl.boot.command.naverLogin.NaverLoginProfile;
+import com.vinyl.boot.command.naverLogin.NaverLoginProfileResponse;
+import com.vinyl.boot.command.naverLogin.NaverLoginVo;
 import com.vinyl.boot.command.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.util.UriComponentsBuilder;
+
+
+
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
+
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private WebClient webClient;
+
+    @Value("${api.naver.client_id}")
+    private String n_client_id;
+
+    @Value("${api.naver.client_secret}")
+    private String n_client_secret;
+
+    @Value("${api.kakao.client_id}")
+    private String k_client_id;
 
     @Override
     public int addJoin(UserVO vo) {
@@ -62,7 +85,7 @@ public class UserServiceImpl implements UserService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
 
-            sb.append("&client_id=1fbd8b26674ade104fbe5d283fca27cb"); //본인이 발급받은 key
+            sb.append("&client_id=" + this.k_client_id); //본인이 발급받은 key
             sb.append("&redirect_uri=http://localhost:8888/kakaoLogin"); // 본인이 설정한 주소
 
             sb.append("&code=" + authorize_code);
@@ -144,4 +167,59 @@ public class UserServiceImpl implements UserService {
         }
         return userInfo;
     }
+
+    @Override
+    public String socialCheckEmail(String email) {
+        return userMapper.socialCheckEmail(email);
+    }
+
+    @Override
+    public String getUsername(String email) {
+        return userMapper.getUsername(email);
+    }
+
+    @Override
+    public NaverLoginVo requestNaverLoginAcceccToken(Map<String, String> resValue, String grant_type){
+
+        final String uri = UriComponentsBuilder
+                .fromUriString("https://nid.naver.com")
+                .path("/oauth2.0/token")
+                .queryParam("grant_type", grant_type)
+                .queryParam("client_id", this.n_client_id)
+                .queryParam("client_secret", this.n_client_secret)
+                .queryParam("code", resValue.get("code"))
+                .queryParam("state", resValue.get("state"))
+                .queryParam("refresh_token", resValue.get("refresh_token")) // Access_token 갱신시 사용
+                .build()
+                .encode()
+                .toUriString();
+
+        System.out.println(resValue.get("access_token"));
+        return webClient
+                .get()
+                .uri(uri)
+                .retrieve()
+                .bodyToMono(NaverLoginVo.class)
+                .block();
+    }
+
+    // ----- 프로필 API 호출 (Unique한 id 값을 가져오기 위함) -----
+    public NaverLoginProfile requestNaverLoginProfile(NaverLoginVo naverLoginVo){
+        final String profileUri = UriComponentsBuilder
+                .fromUriString("https://openapi.naver.com")
+                .path("/v1/nid/me")
+                .build()
+                .encode()
+                .toUriString();
+
+        return webClient
+                .get()
+                .uri(profileUri)
+                .header("Authorization", "Bearer " + naverLoginVo.getAccess_token())
+                .retrieve()
+                .bodyToMono(NaverLoginProfileResponse.class)
+                .block()
+                .getResponse(); // NaverLoginProfile 은 건네준다.
+    }
+
 }

@@ -63,14 +63,10 @@ public class CustomLoginFilter extends UsernamePasswordAuthenticationFilter {
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Authorization", "Bearer " + token);
 
-
-        // response.setContentType("text/html; charset=UTF-8");
         response.getWriter().println("{\"username\":\"" + principal.getUsername() + "\",\"role\":\"" + principal.getRole() + "\", \"token\":\"Bearer " + token + "\" }");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        // String targetUrl = "/";
-        //response.sendRedirect(request.getContextPath() + targetUrl);
     }
 
     // 로그인 살패한 후에 실행되는 메서드
@@ -79,7 +75,6 @@ public class CustomLoginFilter extends UsernamePasswordAuthenticationFilter {
         System.out.println("========로그인 실패 핸들러");
 
         response.setContentType("text/html; charset=UTF-8");
-        // response.getWriter().println("응답할내용");
         response.sendError(500, "아이디 비밀번호를 확인하세요.");
 
     }

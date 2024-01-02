@@ -1,10 +1,13 @@
 package com.vinyl.boot.controller;
 
+import com.vinyl.boot.command.naverLogin.NaverLoginProfile;
+import com.vinyl.boot.command.naverLogin.NaverLoginProfileResponse;
+import com.vinyl.boot.command.naverLogin.NaverLoginVo;
 import com.vinyl.boot.command.UserVO;
 import com.vinyl.boot.command.ValidVO;
+import com.vinyl.boot.security.config.JWTService;
 import com.vinyl.boot.user.service.UserService;
 import com.vinyl.boot.util.MailSend;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -18,12 +21,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 
 @Controller
@@ -174,15 +175,49 @@ public class UserController {
 
         @RequestMapping(value = "/kakaoLogin", method = RequestMethod.GET)
         public String kakaoLogin (@RequestParam(value = "code", required = false) String code,
-                                  RedirectAttributes ra) throws Exception{
+                                  RedirectAttributes ra,
+                                  Model model) throws Exception{
             String access_Token = userService.getAccessToken(code);
             HashMap<String, Object> userInfo = userService.getUserInfo(access_Token);
-            System.out.println("###access_Token#### : " + access_Token);
-            System.out.println("###nickname#### : " + userInfo.get("nickname"));
-            System.out.println("###email#### : " + userInfo.get("email"));
-            ra.addFlashAttribute("access_Token", access_Token);
-            ra.addFlashAttribute("nickname", userInfo.get("nickname"));
-            return "redirect:/";
+
+            String result = userService.socialCheckEmail((String) userInfo.get("email"));
+            System.out.println("결과 : " + result);
+            if (result.equals("true")){
+                String username = userService.getUsername((String)userInfo.get("email"));
+                String token = JWTService.createToken(username, "user");
+                ra.addFlashAttribute("Authorization", "Bearer " + token);
+                ra.addFlashAttribute("username", username);
+                return "redirect:/";
+            } else {
+                model.addAttribute("msg", "가입되어있지 않은 아이디입니다.");
+                return "/main/joinPage";
+            }
+
         }
 
+        @RequestMapping(value = "/naverLogin", method = RequestMethod.GET)
+        public String naverLogin (@RequestParam Map<String, String> resValue,
+                                  RedirectAttributes ra,
+                                  Model model){
+
+            // code 를 받아오면 code 를 사용하여 access_token를 발급받는다.
+            final NaverLoginVo naverLoginVo = userService.requestNaverLoginAcceccToken(resValue, "authorization_code");
+
+            // access_token를 사용하여 사용자의 고유 id값을 가져온다.
+            final NaverLoginProfile naverLoginProfile = userService.requestNaverLoginProfile(naverLoginVo);
+            String email = naverLoginProfile.getEmail();
+            System.out.println("email : " + email);
+            String result = userService.socialCheckEmail(email);
+
+            if (result.equals("true")){
+                String username = userService.getUsername(email);
+                String token = JWTService.createToken(username, "user");
+                ra.addFlashAttribute("Authorization", "Bearer " + token);
+                ra.addFlashAttribute("username", username);
+                return "redirect:/";
+            } else {
+                model.addAttribute("msg", "가입되어있지 않은 아이디입니다.");
+                return "/main/joinPage";
+            }
+        }
 }

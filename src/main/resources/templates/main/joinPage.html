@@ -109,3 +109,9 @@
   }
 </script>
 
+<script th:inline="javascript">
+  let msg = '[[${msg}]]';
+  if (msg !== 'null') {
+    alert(msg);
+  }
+</script>

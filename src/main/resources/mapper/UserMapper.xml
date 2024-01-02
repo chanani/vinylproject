@@ -51,4 +51,15 @@
         set password = #{password}
         where username = #{username}
     </update>
+
+    <select id="socialCheckEmail" parameterType="String">
+        select IF(count(*) = 1, 'true', 'false') as result
+        from user
+        where user_email = #{email}
+    </select>
+
+    <select id="getUsername" parameterType="String">
+        select username from user
+        where user_email = #{email}
+    </select>
 </mapper>

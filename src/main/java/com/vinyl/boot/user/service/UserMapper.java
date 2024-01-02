@@ -11,6 +11,8 @@ public interface UserMapper {
     public UserVO login(String username);
     public int checkEmail(@Param("username") String username, @Param("email") String email);
     public int modifyPassword(@Param("username") String username, @Param("password") String password);
+    public String socialCheckEmail(String email);
+    public String getUsername(String email);
 
 
 }

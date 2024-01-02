@@ -18,6 +18,9 @@
         <!-- JQuery -->
         <script th:src="@{/js/jquery.js}"></script>
 
+        <!-- 네이버 로그인 -->
+        <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"charset="utf-8"></script>
+
         <!-- 부트스트랩js -->
         <script th:src="@{/js/bootstrap.min.js}"></script>
         <link rel="stylesheet" th:href="@{/css/reset.css}">
@@ -89,12 +92,15 @@
                     <div class="login_join">
                         <a th:href="@{/joinpage}">회원가입</a>
                     </div>
-<!-- 1fbd8b26674ade104fbe5d283fca27cb -->
+                    <!-- 1fbd8b26674ade104fbe5d283fca27cb -->
                     <div class="social_login">
                         <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=1fbd8b26674ade104fbe5d283fca27cb&redirect_uri=http://localhost:8888/kakaoLogin
 &response_type=code">
                             <img th:src="@{/img/kakao_login_medium_wide.png}" alt="카카오계정 로그인">
                         </a>
+                        <button onclick="showLoginPopup()">
+                            <img th:src="@{/img/btnG_완성형.png}" alt="네이버 로그인">
+                        </button>
                     </div>
                 </div>
             </div>
@@ -114,7 +120,8 @@
                         <div class="find_write">
                             <p>ID</p>
                             <div class="find_write_id">
-                                <input type="text" placeholder="아이디를 입력하세요." name="username1" class="username" id="write_username">
+                                <input type="text" placeholder="아이디를 입력하세요." name="username1" class="username"
+                                       id="write_username">
                             </div>
                             <p>EMAIL</p>
                             <div class="find_write_email">
@@ -146,11 +153,13 @@
                         <div class="modify_write">
                             <p>PASSWORD</p>
                             <div class="modify_password">
-                                <input type="password" placeholder="비밀번호를 입력하세요." name="password" class="modify_password_input">
+                                <input type="password" placeholder="비밀번호를 입력하세요." name="password"
+                                       class="modify_password_input">
                             </div>
                             <p>PASSWORD</p>
                             <div class="modify_password2">
-                                <input type="password" placeholder="다시 비밀번호를 입력하세요." name="password2" class="modify_password2_input">
+                                <input type="password" placeholder="다시 비밀번호를 입력하세요." name="password2"
+                                       class="modify_password2_input">
                             </div>
                         </div>
 
@@ -233,11 +242,13 @@
         if (msg !== 'null') {
             alert(msg);
         }
-        let access_Token = `[[${access_Token}]]`
-        let nickname = `[[${nickname}]]`
-        if (access_Token !== 'null'){
-            localStorage.setItem("token", access_Token);
-            localStorage.setItem("username", nickname);
+        let Authorization = [[${Authorization}]];
+        let username2 = [[${username}]];
+        console.log(Authorization);
+        console.log(username2);
+        if (Authorization !== null) {
+            localStorage.setItem("token", Authorization);
+            localStorage.setItem("username", username2);
         }
 
     </script>
@@ -338,6 +349,7 @@
                 findModal.classList.add("z_index");
             }
         }
+
         function modifyCloseModal() {
             document.getElementById('pwModify').style.display = 'none';
             let modify_password = document.querySelector(".modify_password > input");
@@ -351,6 +363,7 @@
             const pwModify = document.getElementById('pwModify');
             pwModify.style.display = 'block';
         }
+
         function findCloseModal() {
             document.getElementById('find').style.display = 'none';
             let find_btn_box = document.querySelector(".find_btn_box");
@@ -451,9 +464,9 @@
                 .catch(e => console.log("Error :" + e));
         }
 
-        function authResult (){
+        function authResult() {
             let auth_input = document.querySelector(".auth_input").value;
-            if (auth_input === authNumber){
+            if (auth_input === authNumber) {
                 modifyOpenModal();
             } else {
                 alert("인증번호가 일치하지 않습니다.")
@@ -461,19 +474,19 @@
 
         }
 
-        function modifyBtn(){
+        function modifyBtn() {
             let write_username = document.querySelector("#write_username").value; // username
             let password = document.querySelector(".modify_password_input").value;
             let password2 = document.querySelector(".modify_password2_input").value;
-            if (password === password2){
+            if (password === password2) {
                 fetch("/modifyPassword", {
-                    method : "POST",
-                    headers : {
+                    method: "POST",
+                    headers: {
                         'Content-Type': 'application/json; charset=utf-8'
                     },
-                    body : JSON.stringify({
-                        username : write_username,
-                        password : password
+                    body: JSON.stringify({
+                        username: write_username,
+                        password: password
                     })
                 })
                     .then((response) => response.text())
@@ -485,9 +498,20 @@
             } else {
                 alert("비밀번호가 일치하지 않습니다.");
             }
-
-
         }
+
+        function showLoginPopup(){
+            let uri = 'https://nid.naver.com/oauth2.0/authorize?' +
+                'response_type=code' +                  // 인증과정에 대한 내부 구분값 code 로 전공 (고정값)
+                '&client_id=BsHE6hOf0MwHrvagCoyx' +     // 발급받은 client_id 를 입력
+                '&state=NAVER_LOGIN_TEST' +             // CORS 를 방지하기 위한 특정 토큰값(임의값 사용)
+                '&redirect_uri=http://localhost:8888/naverLogin';   // 어플케이션에서 등록했던 CallBack URL를 입력
+            location.href = uri;
+
+            // 사용자가 사용하기 편하게끔 팝업창으로 띄어준다.
+            // let popup = window.open(uri, "Naver Login Test PopupScreen", "width=450, height=600");
+        }
+
 
     </script>
 

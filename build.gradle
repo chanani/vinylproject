@@ -49,6 +49,10 @@ dependencies {
 
     // JSON
     implementation 'com.google.code.gson:gson:2.8.6'
+
+    // Webclient
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.projectreactor:reactor-spring:1.0.1.RELEASE'
 }
 
 tasks.named('test') {
