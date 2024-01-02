@@ -88,20 +88,20 @@
                         </div>
 
                     </form>
-
-                    <div class="login_join">
-                        <a th:href="@{/joinpage}">회원가입</a>
-                    </div>
-                    <!-- 1fbd8b26674ade104fbe5d283fca27cb -->
                     <div class="social_login">
                         <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=1fbd8b26674ade104fbe5d283fca27cb&redirect_uri=http://localhost:8888/kakaoLogin
 &response_type=code">
-                            <img th:src="@{/img/kakao_login_medium_wide.png}" alt="카카오계정 로그인">
+                            <img th:src="@{/img/kakao_login_large_narrow.png}" alt="카카오계정 로그인">
                         </a>
                         <button onclick="showLoginPopup()">
                             <img th:src="@{/img/btnG_완성형.png}" alt="네이버 로그인">
                         </button>
                     </div>
+
+                    <div class="login_join">
+                        <a th:href="@{/joinpage}">회원가입</a>
+                    </div>
+                    <!-- 1fbd8b26674ade104fbe5d283fca27cb -->
                 </div>
             </div>
         </div>

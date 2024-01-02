@@ -7,6 +7,7 @@ CREATE TABLE `user` (
 	`user_add`	varchar(50)	NOT NULL,
 	`user_count`	int	NULL,
 	`user_insertdate`	timestamp default now() NOT NULL,
+    `user_zonecode` varchar(50) NOT NULL,
     `role` varchar(40) NOT NULL
 );
 

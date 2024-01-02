@@ -46,14 +46,27 @@ input[type="number"]::-webkit-inner-spin-button {
     border-color: white;
 }
 
-.frmJoin .password, .password2, .phone, .address, .address2 {
+.frmJoin .password, .password2, .phone, .address, .address2  {
     width: 398px;
     height: 48px;
     border: none;
     padding-left: 10px;
-
 }
-
+.address_btn_box .zonecode{
+    width: 180px;
+    height: 48px;
+    border: none;
+    padding-left: 10px;
+    border: 1px solid #777;
+}
+.address_btn_box .addBtn {
+    width: 105px;
+    height: 43px;
+    background-color: #674dc3;
+    color: #e0dbdb;
+    border-radius: 5px;
+    border-color: white;
+}
 .frmJoin .email, .email_domain {
     width: 188px;
     height: 48px;

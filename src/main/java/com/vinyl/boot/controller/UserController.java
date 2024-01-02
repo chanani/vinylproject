@@ -187,6 +187,7 @@ public class UserController {
                 String token = JWTService.createToken(username, "user");
                 ra.addFlashAttribute("Authorization", "Bearer " + token);
                 ra.addFlashAttribute("username", username);
+                ra.addFlashAttribute("msg", "반갑습니다.");
                 return "redirect:/";
             } else {
                 model.addAttribute("msg", "가입되어있지 않은 아이디입니다.");
@@ -214,6 +215,7 @@ public class UserController {
                 String token = JWTService.createToken(username, "user");
                 ra.addFlashAttribute("Authorization", "Bearer " + token);
                 ra.addFlashAttribute("username", username);
+                ra.addFlashAttribute("msg", "반갑습니다.");
                 return "redirect:/";
             } else {
                 model.addAttribute("msg", "가입되어있지 않은 아이디입니다.");

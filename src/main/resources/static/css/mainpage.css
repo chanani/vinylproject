@@ -231,7 +231,7 @@ footer .ft_banner .banner_right > li{float: left; padding-left: 15px; }
     background-color: #fefefe;
     border: 1px solid #888;
     width: 580px;
-    height: 520px;
+    height: 490px;
     padding-bottom: 0;
   }
 
@@ -256,7 +256,7 @@ footer .ft_banner .banner_right > li{float: left; padding-left: 15px; }
   .login_box .login_btn_box .login_btn {width: 500px; height: 50px; background-color: rgb(126, 126, 126); border: none; font-size: 18px; border-radius: 5px; color: white;}
   .login_box .login_btn_box .login_btn_box {padding-top: 10px;}
 
-  .login_box .login_join {float:right; padding-top: 10px; }
+  .login_box .login_join {float:right; padding-top: 22px; }
   .login_box .login_join > a {color: #a7a6a6;}
 
 .find_modal_content {
@@ -386,3 +386,9 @@ footer .ft_banner .banner_right > li{float: left; padding-left: 15px; }
     -webkit-overflow-scrolling: touch;
     outline: 0;
 }
+
+.social_login {overflow: hidden; width: 450px; margin: 0 auto; margin-top: 30px;}
+.social_login > a {float: left; width :200px; height: 50px;}
+.social_login > a > img{ width :200px; height: 50px;}
+.social_login > button {float: right; width :200px; height: 50px; border: none}
+.social_login > button > img {width :200px; height: 50px;}
