@@ -1,75 +1,75 @@
 CREATE TABLE `user` (
-	`user_id`	varchar(20)	NOT NULL,
-	`user_pw`	varchar(50)	NOT NULL,
-	`user_name`	varchar(20)	NOT NULL,
+	`username`	varchar(20)	NOT NULL,
+	`password`	varchar(100)	NOT NULL,
 	`user_phone`	varchar(30)	NOT NULL,
 	`user_email`	varchar(40)	NOT NULL,
 	`user_add`	varchar(50)	NOT NULL,
-	`user_count`	int	NULL,
 	`user_insertdate`	timestamp default now() NOT NULL,
+	`user_birth varchar(50) NOT NULL,
     `user_zonecode` varchar(50) NOT NULL,
     `role` varchar(40) NOT NULL
 );
 
 CREATE TABLE `prod` (
 	`prod_num`	int	primary key AUTO_INCREMENT,
-	`prod_name`	varchar(50)	NULL,
-	`prod_singer`	varchar(30)	NULL,
-	`prod_price`	varchar(50)	NULL,
-	`prod_content`	varchar(300)	NULL,
+	`prod_name`	varchar(50)	NOT NULL,
+	`prod_singer`	varchar(30)	NOT NULL,
+	`prod_price`	varchar(50)	NOT NULL,
+	`prod_content`	varchar(300)	NOT NULL,
 	`prod_stock`	int	DEFAULT '0',
 	`prod_hits`	int	DEFAULT '0',
-	`prod_category`	varchar(50)	NULL
+	`prod_category`	varchar(50)	NOT NULL
 );
 
 CREATE TABLE `trackList` (
-	`track_num`	int	NULL,
-	`track_name`	varchar(30)	NULL,
+	`track_num`	int	NOT NULL,
+	`track_name`	varchar(30)	NOT NULL,
 	`prod_num`	int	NOT NULL
 );
 
 CREATE TABLE `notice` (
 	`notice_num`	int	primary key AUTO_INCREMENT,
-	`notice_title`	varchar(50)	NULL,
-	`notice_content`	varchar(300)	NULL,
+	`notice_title`	varchar(50)	NOT NULL,
+	`notice_content`	varchar(300)	NOT NULL,
 	`noteice_regdate`	timestamp default now() NOT NULL,
-	`notice_enddate`	varchar(20)	NULL
+	`notice_enddate`	varchar(20)	NOT NULL
 );
 
 CREATE TABLE `image` (
 	`img_num`	int	primary key AUTO_INCREMENT,
-	`img_name`	varchar(100)	NULL,
-	`img_uuid`	varchar(100)	NULL,
-	`img_path`	varchar(100)	NULL,
+	`img_name`	varchar(100)	NOT NULL,
+	`img_uuid`	varchar(100)	NOT NULL,
+	`img_path`	varchar(100)	NOT NULL,
 	`img_regdate`	timestamp default now() NOT NULL,
-	`img_main`	varchar(100)	NULL,
+	`img_type`	varchar(100)	NOT NULL,
 	`prod_num`	int	NOT NULL
 );
 
 CREATE TABLE `cart` (
 	`cart_num`	int	NOT NULL,
-	`prod_count`	int	NULL,
-	`cart_value`	varchar(30)	NULL,
-	`user_id`	varchar(20)	NOT NULL
+	`prod_count`	int	NOT NULL,
+	`username` VARCHAR(20) NOT NULL,
+	`prod_num` int NOT NULL,
+	`cart_reg` DATETIME NOT NULL
 );
 
 CREATE TABLE `order_detail` (
 	`order_num`	varchar(40)	NOT NULL,
 	`order_date`	timestamp default now() NOT NULL,
-	`order_address`	varchar(50)	NULL,
-	`receiver_name`	varchar(20)	NULL,
-	`receiver_phone`	varchar(30)	NULL,
-	`order_state`	varchar(20)	NULL,
+	`order_address`	varchar(50)	NOT NULL,
+	`receiver_name`	varchar(20)	NOT NULL,
+	`receiver_phone`	varchar(30)	NOT NULL,
+	`order_state`	varchar(20)	NOT NULL,
 	`user_id`	varchar(20)	NOT NULL
 );
 
 CREATE TABLE `ask` (
 	`ask_num`	int	primary key AUTO_INCREMENT,
 	`ask_secret`	CHAR(1) DEFAULT 'Y' CHECK (ask_secret IN ('Y', 'N')),
-	`ask_title`	varchar(30)	NULL,
-	`ask_content`	varchar(300)	NULL,
+	`ask_title`	varchar(30)	NOT NULL,
+	`ask_content`	varchar(300)	NOT NULL,
 	`ask_answer_yn`	CHAR(1) DEFAULT 'N' CHECK (ask_answer_yn IN ('Y', 'N')),
-	`ask_answer`	varchar(300)	NULL,
+	`ask_answer`	varchar(300)	NOT NULL,
 	`user_id`	varchar(20)	NOT NULL
 );
 

@@ -154,4 +154,9 @@ public class ProdServiceImpl implements ProdService{
     public ArrayList<ProdImgVO> searchListImg(String search_data) {
         return prodMapper.searchListImg(search_data);
     }
+
+    @Override
+    public String getRole(String username) {
+        return prodMapper.getRole(username);
+    }
 }

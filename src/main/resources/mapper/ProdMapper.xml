@@ -46,7 +46,7 @@
     </select>
 
     <select id="prodListImg" resultType="ProdImgVO">
-        select * from Image
+        select * from image
         where img_type = '대표이미지'
         order by prod_num desc
     </select>
@@ -136,8 +136,6 @@
                    and i.img_type = '대표이미지'
         order by p.prod_num desc
     </select>
-
-
 
 
 

@@ -6,19 +6,14 @@ import com.vinyl.boot.prod.service.ProdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @Controller
 @RequestMapping("/prod")
@@ -33,8 +28,7 @@ public class ProdController {
 
     @RequestMapping("/prodList")
     public String prodList(Model model,
-                           @RequestParam("search_data") String search_data){
-        System.out.println("searchData : " + search_data);
+                           @RequestParam(value = "search_data", required = false) String search_data) throws Exception{
         if (search_data == null || search_data == "") {
             ArrayList<ProdVO> list = prodService.prodList();
             ArrayList<ProdImgVO> imgList = prodService.prodListImg();
@@ -49,6 +43,7 @@ public class ProdController {
             for (int i = 0; i < imgList.size(); i++) {
                 System.out.println("imgList : " + imgList.get(i).getImg_name());
             }
+
             return "/prod/prodList";
         }
 
@@ -69,8 +64,15 @@ public class ProdController {
     }
 
     @RequestMapping("/prodReg")
-    public String prodReg(){
-        return "/prod/prodReg";
+    public String prodReg(@RequestParam(value = "role", required = false) String role,
+                          RedirectAttributes ra){
+
+        if (role.equals("ROLE_ADMIN")){
+            return "/prod/prodReg";
+        } else {
+            ra.addFlashAttribute("msg", "접근 권한이 없습니다.");
+            return "redirect:/";
+        }
     }
 
     @RequestMapping("/registForm")

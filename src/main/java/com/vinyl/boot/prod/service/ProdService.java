@@ -24,4 +24,5 @@ public interface ProdService {
     public void trackList_add(ArrayList<String> list_name);
     public ArrayList<ProdVO> searchList(String search_data);
     public ArrayList<ProdImgVO> searchListImg(String search_data);
+    public String getRole(String username);
 }

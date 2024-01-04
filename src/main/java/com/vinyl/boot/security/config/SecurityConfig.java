@@ -44,7 +44,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.formLogin().disable(); // form기반으로 로그인을 사용하지 않음
         http.httpBasic().disable(); // Authorization : 아이디 형식으로 넘어오는 basic인증을 사용하지 않음
-        http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll()); // 모든 요청은 전부 허용
+        http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
 
         // 1. 크로스오리진 필터 생성 cors
         http.cors(Customizer.withDefaults());

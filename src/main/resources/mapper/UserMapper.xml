@@ -21,7 +21,7 @@
                #{user_add},
                #{user_birth},
                #{user_zonecode},
-               'user')
+               'ROLE_USER')
     </insert>
 
     <select id="checkId" resultType="String">
@@ -64,4 +64,10 @@
         select username from user
         where user_email = #{email}
     </select>
+
+    <select id="getRole" parameterType="String">
+        select role from user
+        where username = #{username}
+    </select>
+
 </mapper>

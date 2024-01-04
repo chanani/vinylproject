@@ -27,6 +27,7 @@ public interface ProdMapper {
     public void trackList_add(ArrayList<String> list_name);
     public ArrayList<ProdVO> searchList(String search_data); // 검색 기능
     public ArrayList<ProdImgVO> searchListImg(String search_data); // 검색 이미지
+    public String getRole(String username);
 
 
 }
