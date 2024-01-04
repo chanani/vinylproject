@@ -6,12 +6,13 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Mapper
 public interface ProdMapper {
 
     public int prodRegist(ProdVO vo);
-    public int prodRegistImg(@Param("prod_name") String prod_name, @Param("list") ArrayList<ProdImgVO> list);
+    public int prodRegistImg(@Param("prod_name") String prod_name, @Param("list") List<ProdImgVO> list);
     public ArrayList<ProdVO> prodList(); // 메인페이지 리스트
     public ArrayList<ProdImgVO> prodListImg(); // 메인페이지 이미지
     public ArrayList<ProdVO> prodNewList (); // 메인페이지 new리스트

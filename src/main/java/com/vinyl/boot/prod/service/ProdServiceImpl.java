@@ -1,20 +1,26 @@
 package com.vinyl.boot.prod.service;
 
+import com.amazonaws.services.s3.AmazonS3;
+import com.vinyl.boot.aws.S3Uploader;
 import com.vinyl.boot.command.ProdImgVO;
 import com.vinyl.boot.command.ProdVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import software.amazon.awssdk.services.s3.S3Client;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service("prodService")
+@RequiredArgsConstructor
 public class ProdServiceImpl implements ProdService{
 
     @Autowired
@@ -22,6 +28,9 @@ public class ProdServiceImpl implements ProdService{
 
     @Value("${project.upload.path}")
     private String uploadPath;
+
+    private final S3Uploader s3Uploader;
+
 
     // 폴더 생성함수
     private String makeFolder() {
@@ -41,10 +50,10 @@ public class ProdServiceImpl implements ProdService{
     }
 
     @Override
-    public int prodRegistImg(String prod_name, ArrayList<MultipartFile> file) {
+    public int prodRegistImg(String prod_name, List<MultipartFile> file) {
         //파일 이름 받기
 
-        ArrayList<ProdImgVO> list = new ArrayList<>();
+        List<ProdImgVO> list = new ArrayList<>();
 
         int index = 0;
         for(MultipartFile file1 : file){
@@ -80,14 +89,16 @@ public class ProdServiceImpl implements ProdService{
             index++;
         }
 
+        // S3 upload
+        List<ProdImgVO> prodImgVOList;
+        if (!file.isEmpty()){
+            s3Uploader.uploadImage(file);
+        }
+
         int result = prodMapper.prodRegistImg(prod_name, list);
 
-        //productUpload 테이블에 파일 경로 insert
-        //prod_id는 insert 전에
 
-
-// prod_name, prod_no 대신 prod_del_no로 변경 -> 테이블도 변경
-        return 0;
+        return result;
     }
 
     @Override

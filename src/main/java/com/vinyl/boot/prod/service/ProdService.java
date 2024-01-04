@@ -10,7 +10,7 @@ import java.util.List;
 public interface ProdService {
 
     public int prodRegist(ProdVO vo);
-    public int prodRegistImg(String prod_num, ArrayList<MultipartFile> file);
+    public int prodRegistImg(String prod_num, List<MultipartFile> file);
     public ArrayList<ProdVO> prodList ();
     public ArrayList<ProdImgVO> prodListImg();
     public ArrayList<ProdVO> prodNewList ();
