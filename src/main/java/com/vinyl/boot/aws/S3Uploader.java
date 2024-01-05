@@ -30,7 +30,7 @@ public class S3Uploader {
     @Value("${cloud.aws_target_bucket}")
     private String bucket;
 
-    public void uploadImage(List<MultipartFile> multipartFiles) {
+    /*public void uploadImage(List<MultipartFile> multipartFiles) {
         multipartFiles.forEach(file -> {
             try {
                 // 파일이 존재하는지 확인
@@ -51,6 +51,20 @@ public class S3Uploader {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "이미지 업로드 실패", e);
             }
         });
+    }*/
+    public void uploadImage(MultipartFile multipartFiles) {
+        FileName fileNameResult = createFileName(multipartFiles.getOriginalFilename());
+        String filename = fileNameResult.getFileName();
+        String uuid = fileNameResult.getUuid();
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+        objectMetadata.setContentLength(multipartFiles.getSize());
+        objectMetadata.setContentType(multipartFiles.getContentType());
+        try(InputStream inputStream = multipartFiles.getInputStream()) {
+            amazonS3Client.putObject(new PutObjectRequest(bucket, filename, inputStream, objectMetadata)
+                    .withCannedAcl(CannedAccessControlList.PublicRead));
+        } catch (IOException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "이미지 업로드 실패", e);
+        }
     }
 
 

@@ -55,6 +55,10 @@ public class ProdServiceImpl implements ProdService{
 
         List<ProdImgVO> list = new ArrayList<>();
 
+        if (!file.isEmpty()){
+            s3Uploader.uploadImage(file.get(0));
+        }
+
         int index = 0;
         for(MultipartFile file1 : file){
             String originName = file1.getOriginalFilename();
@@ -90,10 +94,7 @@ public class ProdServiceImpl implements ProdService{
         }
 
         // S3 upload
-        List<ProdImgVO> prodImgVOList;
-        if (!file.isEmpty()){
-            s3Uploader.uploadImage(file);
-        }
+
 
         int result = prodMapper.prodRegistImg(prod_name, list);
 
