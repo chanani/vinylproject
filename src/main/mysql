@@ -15,7 +15,7 @@ CREATE TABLE `prod` (
 	`prod_name`	varchar(50)	NOT NULL,
 	`prod_singer`	varchar(30)	NOT NULL,
 	`prod_price`	varchar(50)	NOT NULL,
-	`prod_content`	varchar(300)	NOT NULL,
+	`prod_content`	varchar(3000)	NOT NULL,
 	`prod_stock`	int	DEFAULT '0',
 	`prod_hits`	int	DEFAULT '0',
 	`prod_category`	varchar(50)	NOT NULL

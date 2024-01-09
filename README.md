@@ -1,5 +1,7 @@
 <img width="1169" alt="MainPagePC" src="https://github.com/chanani/vinylproject/assets/130114269/02ccd190-c92a-447b-aa79-0e2d9224ae6b">
 
+## Endpoints
+
 
 ## 목차
 
