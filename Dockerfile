@@ -1,4 +1,4 @@
-FROM amazoncorrectto:11-alpine-jdk
+FROM amazoncorretto:11-alpine-jdk
 ARG JAR_FILE=build/libs/*.jar
 ARG PROFILES
 ARG ENV
