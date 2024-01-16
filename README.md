@@ -1,4 +1,5 @@
-<img width="1169" alt="MainPagePC" src="https://github.com/chanani/vinylproject/assets/130114269/02ccd190-c92a-447b-aa79-0e2d9224ae6b">
+![de](https://github.com/chanani/vinylproject/assets/130114269/3e0674dd-2eb0-4a3b-9f6b-2a4599192d6c)
+
 
 ## Endpoints
 
@@ -71,6 +72,7 @@
 
 ## 아키텍처
 
+![vinylA](https://github.com/chanani/vinylproject/assets/130114269/e0321088-eb30-40bc-92ce-876dcdeec3d1)
 
 
 
