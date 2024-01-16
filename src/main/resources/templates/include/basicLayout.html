@@ -88,7 +88,7 @@
 
                     </form>
                     <div class="social_login">
-                        <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=1fbd8b26674ade104fbe5d283fca27cb&redirect_uri=http://localhost:8888/kakaoLogin
+                        <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=1fbd8b26674ade104fbe5d283fca27cb&redirect_uri=http://52.78.73.39/kakaoLogin
 &response_type=code">
                             <img th:src="@{/img/kakao_login_large_narrow.png}" alt="카카오계정 로그인">
                         </a>
@@ -515,7 +515,7 @@
                 'response_type=code' +                  // 인증과정에 대한 내부 구분값 code 로 전공 (고정값)
                 '&client_id=BsHE6hOf0MwHrvagCoyx' +     // 발급받은 client_id 를 입력
                 '&state=NAVER_LOGIN_TEST' +             // CORS 를 방지하기 위한 특정 토큰값(임의값 사용)
-                '&redirect_uri=http://localhost:8888/naverLogin';   // 어플케이션에서 등록했던 CallBack URL를 입력
+                '&redirect_uri=http://52.78.73.39/naverLogin';   // 어플케이션에서 등록했던 CallBack URL를 입력
             location.href = uri;
 
             // 사용자가 사용하기 편하게끔 팝업창으로 띄어준다.
