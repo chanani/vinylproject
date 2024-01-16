@@ -2,9 +2,9 @@ spring:
   profiles:
     active: local
     group:
-      local: local, common
-      blue: local, common
-      green: local, common
+      local: local
+      blue: blue
+      green: green
 
 server:
   env: blue
@@ -19,7 +19,8 @@ spring:
 server:
   port: 8080
   serverAddress: localhost
-  serverName: local_server
+
+serverName: local_server
 
 ---
 
@@ -31,7 +32,8 @@ spring:
 server:
   port: 8080
   serverAddress: 52.78.73.39
-  serverName: blue_server
+
+serverName: blue_server
 
 ---
 
@@ -43,4 +45,5 @@ spring:
 server:
   port: 8081
   serverAddress: 52.78.73.39
-  serverName: green_server
+
+serverName: green_server
