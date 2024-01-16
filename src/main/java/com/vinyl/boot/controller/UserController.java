@@ -95,12 +95,12 @@ public class UserController {
                 }
             }
 
-            return "/main/joinPage"; // 실패시 원래 화면으로
+            return "main/joinPage"; // 실패시 원래 화면으로
         }
 
         if (!vo.getPassword().equals(password2)) {
             model.addAttribute("valid_password2", "비밀번호가 일치하지 않습니다.");
-            return "/main/joinPage";
+            return "main/joinPage";
         }
 
         String encryptedPassword = passwordEncoder.encode(vo.getPassword());
@@ -118,7 +118,7 @@ public class UserController {
 
         String msg = result == 1 ? "회원가입이 완료되었습니다." : "회원가입에 실패하셨습니다.";
         ra.addFlashAttribute("msg", msg);
-        return "redirect:/";
+        return "redirect:";
     }
 
     @PostMapping("/authNumber")
@@ -188,10 +188,10 @@ public class UserController {
                 ra.addFlashAttribute("Authorization", "Bearer " + token);
                 ra.addFlashAttribute("username", username);
                 ra.addFlashAttribute("msg", "반갑습니다.");
-                return "redirect:/";
+                return "redirect:";
             } else {
                 model.addAttribute("msg", "가입되어있지 않은 아이디입니다.");
-                return "/main/joinPage";
+                return "main/joinPage";
             }
 
         }
@@ -216,10 +216,10 @@ public class UserController {
                 ra.addFlashAttribute("Authorization", "Bearer " + token);
                 ra.addFlashAttribute("username", username);
                 ra.addFlashAttribute("msg", "반갑습니다.");
-                return "redirect:/";
+                return "redirect:";
             } else {
                 model.addAttribute("msg", "가입되어있지 않은 아이디입니다.");
-                return "/main/joinPage";
+                return "main/joinPage";
             }
         }
 }

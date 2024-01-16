@@ -45,7 +45,7 @@ public class MainController {
         model.addAttribute("imgList", imgList);
         model.addAttribute("imgList2", imgList2);
 
-        return "/main/mainpage";
+        return "main/mainpage";
     }
 
     @GetMapping("/cartPage")
@@ -66,12 +66,12 @@ public class MainController {
         model.addAttribute("imgList", imgList);
         model.addAttribute("price_sum", price_sum);
         model.addAttribute("cart_count", cart_count);
-        return "/main/cartPage";
+        return "main/cartPage";
     }
 
     @RequestMapping("/joinpage")
     public String joinpage(){
-        return "/main/joinPage";
+        return "main/joinPage";
     }
 
 

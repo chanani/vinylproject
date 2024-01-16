@@ -34,7 +34,7 @@ public class ProdController {
             ArrayList<ProdImgVO> imgList = prodService.prodListImg();
             model.addAttribute("list", list);
             model.addAttribute("imgList", imgList);
-            return "/prod/prodList";
+            return "prod/prodList";
         } else {
             ArrayList<ProdVO> list = prodService.searchList(search_data);
             ArrayList<ProdImgVO> imgList = prodService.searchListImg(search_data);
@@ -44,7 +44,7 @@ public class ProdController {
                 System.out.println("imgList : " + imgList.get(i).getImg_name());
             }
 
-            return "/prod/prodList";
+            return "prod/prodList";
         }
 
 
@@ -68,10 +68,10 @@ public class ProdController {
                           RedirectAttributes ra){
 
         if (role.equals("ROLE_ADMIN")){
-            return "/prod/prodReg";
+            return "prod/prodReg";
         } else {
             ra.addFlashAttribute("msg", "접근 권한이 없습니다.");
-            return "redirect:/";
+            return "redirect:";
         }
     }
 
@@ -90,7 +90,7 @@ public class ProdController {
 
         if (file.get(0).getContentType().contains("image") == false) {
             ra.addFlashAttribute("msg", "jpg, png, jpeg 형식의 이미지 파일만 등록이 가능합니다.");
-            return "redirect:/prod/prodList"; //이미지가 아니라면 list목록으로
+            return "redirect:prod/prodList"; //이미지가 아니라면 list목록으로
         }
 
 
@@ -104,7 +104,7 @@ public class ProdController {
         }
         prodService.trackList_add(list_name);
 
-        return "redirect:/prod/prodList";
+        return "redirect:prod/prodList";
     }
 
 
